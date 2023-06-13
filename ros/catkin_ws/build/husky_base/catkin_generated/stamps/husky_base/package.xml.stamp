@@ -1,49 +1,45 @@
 <?xml version="1.0"?>
-<?xml-model
-  href="http://download.ros.org/schema/package_format3.xsd"
-  schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
-  <name>catkin</name>
-  <version>0.8.10</version>
-  <description>Low-level build system macros and infrastructure for ROS.</description>
-  <maintainer email="michael@openrobotics.org">Michael Carroll</maintainer>
-  <maintainer email="tfoote@openrobotics.org">Tully Foote</maintainer>
+<package>
+  <name>husky_base</name>
+  <version>0.6.9</version>
+  <description>Clearpath Husky robot driver</description>
+
+  <author email="mpurvis@clearpathrobotics.com">Mike Purvis</author>
+  <author email="paul@bovbel.com">Paul Bovbel</author>
+
+  <maintainer email="tbaltovski@clearpathrobotics.com">Tony Baltovski</maintainer>
+
+
   <license>BSD</license>
 
-  <url type="website">http://wiki.ros.org/catkin</url>
-  <url type="bugtracker">https://github.com/ros/catkin/issues</url>
-  <url type="repository">https://github.com/ros/catkin</url>
+  <url type="website">http://ros.org/wiki/husky_base</url>
+  <url type="bugtracker">https://github.com/husky/husky_robot/issues</url>
+  <url type="repository">https://github.com/husky/husky_robot</url>
 
-  <author>Troy Straszheim</author>
-  <author>Morten Kjaergaard</author>
-  <author>Brian Gerkey</author>
-  <author>Dirk Thomas</author>
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>controller_manager</build_depend>
+  <build_depend>diagnostic_updater</build_depend>
+  <build_depend>diagnostic_msgs</build_depend>
+  <build_depend>hardware_interface</build_depend>
+  <build_depend>husky_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslaunch</build_depend>
+  <build_depend>roslint</build_depend>
+  <build_depend>sensor_msgs</build_depend>
 
-  <depend condition="$ROS_PYTHON_VERSION == 2">python-argparse</depend>
-  <depend condition="$ROS_PYTHON_VERSION == 2" version_gt="0.4.3">python-catkin-pkg</depend>
-  <depend condition="$ROS_PYTHON_VERSION == 3" version_gt="0.4.3">python3-catkin-pkg</depend>
-  <depend condition="$ROS_PYTHON_VERSION == 2">python-empy</depend>
-  <depend condition="$ROS_PYTHON_VERSION == 3">python3-empy</depend>
+  <run_depend>controller_manager</run_depend>
+  <run_depend>diagnostic_updater</run_depend>
+  <run_depend>diagnostic_msgs</run_depend>
+  <run_depend>diagnostic_aggregator</run_depend>
+  <run_depend>diff_drive_controller</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>hardware_interface</run_depend>
+  <run_depend>husky_control</run_depend>
+  <run_depend>husky_msgs</run_depend>
+  <run_depend>husky_description</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>topic_tools</run_depend>
 
-  <buildtool_depend>cmake</buildtool_depend>
-  <buildtool_depend condition="$ROS_PYTHON_VERSION == 2">python-setuptools</buildtool_depend>
-  <buildtool_depend condition="$ROS_PYTHON_VERSION == 3">python3-setuptools</buildtool_depend>
-
-  <buildtool_export_depend>cmake</buildtool_export_depend>
-  <buildtool_export_depend condition="$ROS_PYTHON_VERSION == 3">python3-setuptools</buildtool_export_depend>
-
-  <build_export_depend>google-mock</build_export_depend>
-  <build_export_depend>gtest</build_export_depend>
-  <build_export_depend condition="$ROS_PYTHON_VERSION == 2">python-nose</build_export_depend>
-  <build_export_depend condition="$ROS_PYTHON_VERSION == 3">python3-nose</build_export_depend>
-
-  <test_depend condition="$ROS_PYTHON_VERSION == 2">python-mock</test_depend>
-  <test_depend condition="$ROS_PYTHON_VERSION == 3">python3-mock</test_depend>
-  <test_depend condition="$ROS_PYTHON_VERSION == 2">python-nose</test_depend>
-  <test_depend condition="$ROS_PYTHON_VERSION == 3">python3-nose</test_depend>
-
-  <export>
-    <rosdoc config="rosdoc.yaml"/>
-    <architecture_independent/>
-  </export>
+  <export></export>
 </package>

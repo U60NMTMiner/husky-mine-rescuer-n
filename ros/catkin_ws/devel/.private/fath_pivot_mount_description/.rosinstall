@@ -1,0 +1,2 @@
+- setup-file:
+    local-name: /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/fath_pivot_mount_description/setup.sh

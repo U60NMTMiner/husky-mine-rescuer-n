@@ -1,0 +1,8 @@
+prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/install
+
+Name: lms1xx
+Description: Description of lms1xx
+Version: 0.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp

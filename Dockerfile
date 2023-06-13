@@ -17,11 +17,6 @@ RUN apt-get install -y \
   python3-rosdep \
   libeigen3-dev
 
-# 2. Install ROS packages from apt.
-RUN apt-get install -y \
-  ros-noetic-roscpp \
-  ros-noetic-ros-control
-
 # Install visual and debugging tools
 RUN apt-get install -y \
   ros-noetic-rosbag \
@@ -32,9 +27,21 @@ RUN apt-get install -y \
   ros-noetic-dynamic-reconfigure \
   ros-noetic-rqt-reconfigure
 
+# 2. Install ROS packages from apt.
+RUN apt-get install -y \
+  ros-noetic-roscpp \
+  ros-noetic-ros-control \
+  ros-noetic-diagnostics \
+  ros-noetic-roslint \
+  ros-noetic-robot-upstart \
+  ros-noetic-robot-state-publisher \
+  ros-noetic-xacro \
+  ros-noetic-velodyne-description
+
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
 
 COPY ros /ros
-#RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
+RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
+RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
 

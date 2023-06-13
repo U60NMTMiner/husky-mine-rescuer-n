@@ -1,0 +1,2 @@
+/usr/bin/ar qc libLMS1xx.a  CMakeFiles/LMS1xx.dir/src/LMS1xx.cpp.o
+/usr/bin/ranlib libLMS1xx.a

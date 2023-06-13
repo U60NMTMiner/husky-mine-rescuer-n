@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/share/flir_camera_description/cmake/flir_camera_descriptionConfig-version.cmake

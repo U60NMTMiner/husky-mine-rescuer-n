@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_base/share/husky_base/cmake/husky_baseConfig-version.cmake

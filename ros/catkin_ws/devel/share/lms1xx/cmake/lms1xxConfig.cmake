@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/lms1xx/share/lms1xx/cmake/lms1xxConfig.cmake
