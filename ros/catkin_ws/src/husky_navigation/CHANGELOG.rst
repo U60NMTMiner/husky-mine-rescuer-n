@@ -2,6 +2,56 @@
 Changelog for package husky_navigation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.6.9 (2023-05-19)
+------------------
+
+0.6.8 (2023-05-04)
+------------------
+
+0.6.7 (2023-03-10)
+------------------
+* Add a scan_topic argument to the gmapping_demo
+  This just exposes the gmapping.launch file's argument to the gmapping_demo.launch to make it easier to use non-standard topics.
+* Contributors: Chris Iverach-Brereton
+
+0.6.6 (2023-01-16)
+------------------
+
+0.6.5 (2022-11-25)
+------------------
+* Fixed all scan topics to use front/scan.
+* [husky_navigation] Updated DWAPlannerROS to use non-deprecated parameters.
+* Contributors: Tony Baltovski
+
+0.6.4 (2022-06-16)
+------------------
+
+0.6.3 (2022-05-16)
+------------------
+
+0.6.2 (2022-02-15)
+------------------
+* Bump CMake version to avoid CMP0048 warning.
+* Contributors: Tony Baltovski
+
+0.6.1 (2022-01-18)
+------------------
+* Check launch file only if testing
+  When building husky_control, husky_description, husky_navigation or
+  husky_viz without tests, CMake fails as it does not find
+  `catkin_run_tests_target` command. This patch adds conditions to fix
+  this problem.
+* Contributors: Alexandre Iooss
+
+0.6.0 (2021-09-28)
+------------------
+
+0.5.1 (2021-09-16)
+------------------
+
+0.5.0 (2021-08-23)
+------------------
+
 0.4.4 (2020-08-13)
 ------------------
 * Removed Paul Bovbel as maintainer.

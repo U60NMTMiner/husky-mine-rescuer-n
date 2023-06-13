@@ -60,6 +60,7 @@ namespace clearpath
     Request(const Request &other);
   };
 
-} // namespace clearpath
+}; // namespace clearpath
 
 #endif  // CLEARPATH_MESSAGE_REQUEST_H
+

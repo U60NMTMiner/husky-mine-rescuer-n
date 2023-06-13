@@ -2,50 +2,64 @@
 Changelog for package husky_gazebo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.8 (2022-05-19)
+0.6.9 (2023-05-19)
 ------------------
 
-1.0.7 (2022-05-19)
+0.6.8 (2023-05-04)
 ------------------
-* Renamed all launch files to *.launch.py.
+
+0.6.7 (2023-03-10)
+------------------
+
+0.6.6 (2023-01-16)
+------------------
+* Merge pull request `#270 <https://github.com/husky/husky/issues/270>`_ from husky/rename-empty-world
+* Rename husky_empty_world.launch to empty_world.launch to make it consistent with other platforms
+* Contributors: Chris Iverach-Brereton, Tony Baltovski
+
+0.6.5 (2022-11-25)
+------------------
+* Add XML decleration to realsense.launch
+* Update realsense.launch
+* Update realsense.launch
+* Contributors: Tinker Twins
+
+0.6.4 (2022-06-16)
+------------------
+
+0.6.3 (2022-05-16)
+------------------
+
+0.6.2 (2022-02-15)
+------------------
+* Bump CMake version to avoid CMP0048 warning.
 * Contributors: Tony Baltovski
 
-1.0.6 (2022-05-18)
+0.6.1 (2022-01-18)
 ------------------
-
-1.0.5 (2022-05-05)
-------------------
-* Switched to gazebo_plugins for IMU and GPS.
-* [husky_gazebo] Removed ros2_control_node from gazebo launch.
-* Split teleop launch into two files since simulation doesn't need actual joystick and will spam warmings.
-* Revamped tele-op launch.
+* [husky_gazebo] Fixed roslaunch tests.
 * Contributors: Tony Baltovski
 
-1.0.4 (2022-03-15)
-------------------
-* [husky_gazebo] Added controller_manager to gazebo_launch.py.
-* [husky_gazebo] Added gazebo_ros2_control as an exec dep.
-* Merge pull request `#191 <https://github.com/husky/husky/issues/191>`_ from StoglRobotics-forks/gazebo-sim-integration-fixes
-  Gazebo sim integration fixes
-* [husky_gazebo] Switched from spawner to spawner.py.
-* Contributors: Tony Baltovski
-
-1.0.3 (2021-11-30)
+0.6.0 (2021-09-28)
 ------------------
 
-1.0.2 (2021-11-16)
+0.5.1 (2021-09-16)
 ------------------
-* Make variable names clearer.
-* Contributors: Denis Štogl
+* Remove the need to explicitly specify the laser_enabled, realsense_enabled, and urdf_extras arguments; use the envars to make it easier to simulate customized robots & use the moveit setup assistant.
+* Add VLP16, secondary LMS1xx support (`#164 <https://github.com/husky/husky/issues/164>`_)
+  * Minimal refactor to add VLP16 + secondary LMS1xx support. Update defaults for the laser_enabled and realsense_enabled args to refer to the underlying envars to improve consistency when launching simulations. Modify the sensor bar to allow it to be positioned in the center by default, but with configurable xyz and rpy offsets
+  * Add the new run dependencies
+  * Remove the prefix's trailing underscore in the vlp16 mount to make it consistent. Fix an inconsistent envar for the sensor arch, add an arg to explicitly enable it, to stay internally consistent with the rest of Husky.
+  * Fix the envars; its just HUSKY_LMS1XX, not HUSKY_LASER_LMS1XX
+  * Revert to enabling the main laser by default in the simulations, add the velodyne_gazebo_plugins dependency
+* Contributors: Chris I-B, Chris Iverach-Brereton
 
-1.0.1 (2021-11-12)
+0.5.0 (2021-08-23)
 ------------------
-
-1.0.0 (2021-11-07)
-------------------
-* Initial Gazebo Classic changes.
-* Added COLCON_IGNORE for certian packages.
-* Contributors: Tony Baltovski
+* Disabled multimaster.
+* Update spawn_husky.launch
+  I think the robot spawn should be like this
+* Contributors: Guido Sanchez, Tony Baltovski
 
 0.4.4 (2020-08-13)
 ------------------

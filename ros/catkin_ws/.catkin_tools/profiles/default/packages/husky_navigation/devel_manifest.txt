@@ -1,0 +1,5 @@
+husky_navigation
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_navigation/cmake.lock /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/./cmake.lock
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_navigation/share/husky_navigation/cmake/husky_navigationConfig-version.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/husky_navigation/cmake/husky_navigationConfig-version.cmake
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_navigation/share/husky_navigation/cmake/husky_navigationConfig.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/husky_navigation/cmake/husky_navigationConfig.cmake
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_navigation/lib/pkgconfig/husky_navigation.pc /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/pkgconfig/husky_navigation.pc

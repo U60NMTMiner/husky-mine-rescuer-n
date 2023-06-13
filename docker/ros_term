@@ -67,13 +67,13 @@ if ! $disable_rebuild; then
 fi
 
 # Clean up the container if it's already running.
-docker stop $CONTAINER_NAME || true
-docker rm $CONTAINER_NAME || true
+sudo docker stop $CONTAINER_NAME &>/dev/null || true
+sudo docker rm $CONTAINER_NAME  &>/dev/null || true
 
 # Clean up on ctrl-C.
 cleanup () {
-    docker stop $CONTAINER_NAME || true
-    docker rm $CONTAINER_NAME || true
+    sudo docker stop $CONTAINER_NAME || true
+    sudo docker rm $CONTAINER_NAME || true
     exit 1
 }
 trap cleanup INT
@@ -92,4 +92,4 @@ sudo docker run \
 
 # ROS might create files owned by root here; it'll cause all kinds of
 # problems with git.
-sudo chown -R "$(id -u):$(id -g)" "$DIR"
+sudo chown -R "$(id -u):$(id -g)" "$DIR/.."

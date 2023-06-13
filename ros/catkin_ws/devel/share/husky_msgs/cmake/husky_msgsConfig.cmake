@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/husky_msgs/cmake/husky_msgsConfig.cmake

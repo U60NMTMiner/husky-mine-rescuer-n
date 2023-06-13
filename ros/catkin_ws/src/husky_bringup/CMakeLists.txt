@@ -1,15 +1,14 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.0.2)
 project(husky_bringup)
 
-find_package(ament_cmake REQUIRED)
+find_package(catkin REQUIRED COMPONENTS roslaunch)
 
+catkin_package()
 
-install(DIRECTORY config launch udev
-  DESTINATION share/${PROJECT_NAME}
-)
-install(PROGRAMS scripts/install 
-  DESTINATION lib/${PROJECT_NAME}
-)
+roslaunch_add_file_check(launch)
 
+install(PROGRAMS scripts/install scripts/calibrate_compass scripts/compute_calibration
+   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
-ament_package()
+install(DIRECTORY launch config
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})

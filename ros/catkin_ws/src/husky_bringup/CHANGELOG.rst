@@ -2,23 +2,24 @@
 Changelog for package husky_bringup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.8 (2022-05-19)
+0.5.1 (2021-09-16)
 ------------------
+* Fix the name of teh VLP16 launch file that gets included
+* Add a missing colon to the install script
+* Add VLP16, secondary LMS1xx support (`#164 <https://github.com/husky/husky/issues/164>`_)
+  * Minimal refactor to add VLP16 + secondary LMS1xx support. Update defaults for the laser_enabled and realsense_enabled args to refer to the underlying envars to improve consistency when launching simulations. Modify the sensor bar to allow it to be positioned in the center by default, but with configurable xyz and rpy offsets
+  * Add the new run dependencies
+  * Remove the prefix's trailing underscore in the vlp16 mount to make it consistent. Fix an inconsistent envar for the sensor arch, add an arg to explicitly enable it, to stay internally consistent with the rest of Husky.
+  * Fix the envars; its just HUSKY_LMS1XX, not HUSKY_LASER_LMS1XX
+  * Revert to enabling the main laser by default in the simulations, add the velodyne_gazebo_plugins dependency
+* Contributors: Chris I-B
 
-1.0.7 (2022-05-19)
+0.5.0 (2021-08-23)
 ------------------
-* Renamed all launch files to *.launch.py.
-* Contributors: Tony Baltovski
-
-1.0.6 (2022-05-18)
-------------------
-
-1.0.5 (2022-05-05)
-------------------
-* Updated package versions for un-released packages.
-* [husky_bringup] Disabled gps bringup for now since nmea_navsat_driver isn't released.
-* Initial accessories launch file.
-* Contributors: Tony Baltovski
+* [husky_bringup] Switched microstrain_mips to ros_mscl.
+* Fix the python-scipy dependency to refer to the python-3 version; python-scipy isn't installable on Focal
+* Fix a bug where the UM7 and UM6 launch files don't work when installed to /etc/ros/*/ros.d; they fail to find the mag config files.
+* Contributors: Chris Iverach-Brereton, Tony Baltovski
 
 0.4.4 (2020-08-13)
 ------------------
@@ -80,6 +81,83 @@ Changelog for package husky_bringup
 * Purge more UR; Implement urdf_extras
 * Move packages into monorepo for kinetic; strip out ur packages
 * Contributors: Paul Bovbel, Tony Baltovski
+
+0.6.9 (2023-03-10)
+------------------
+* Updated Secondary Realsense Variables
+* Create README.md
+* Change HUSKY_IMU_MICROSTRAIN_PORT to HUSKY_IMU_PORT for Microstrain IMU to maintain backwards compatability with legacy microstrain launch file.
+* Replace ros_mscl with microstrain_inertial_driver
+* Contributors: Joey Yang, luis-camero
+
+0.6.8 (2022-12-01)
+------------------
+* Removed manual definition of base_frame_id
+* [husky_bringup] Updated compute_calibration to use MagneticField message.
+* Fix MagneticField msg reading
+* Contributors: Luis Camero, Saurav Agarwal, Tony Baltovski
+
+0.6.7 (2022-06-16)
+------------------
+* Fixes for velodyne prefix
+* Secondary sensors (`#24 <https://github.com/husky/husky_robot/issues/24>`_)
+  * Added second blackfly to launch
+  * Fixed prefix in UST10 launch
+  * Added remap to launch file to get desired topics
+  * Launch file now launches 2 Reaslenses directly using Nodelet launch
+  * Added second 3D laser to launch file
+  * Added entries for secondary sensors
+  * Added new line at EOF
+* Use configurable laser prefix
+  husky_description supports changing the frame ID, but without being able to change the frame ID in the launch file you wind up with a broken tf
+  - https://github.com/husky/husky/blob/2c46d3b0d4815bdf4a8973d62439657155f831da/husky_description/urdf/husky.urdf.xacro#L35
+  - https://github.com/husky/husky/blob/2c46d3b0d4815bdf4a8973d62439657155f831da/husky_description/urdf/husky.urdf.xacro#L42
+  Also, the existing default "base_laser" is inconsistent with the latest husky_description.
+  IndoorNav, because of how Otto's implemented parts of it, currently requires the front & rear lidar frames to be `front_laser` and `rear_laser` respectively, so fixing this will also make IndoorNav easier to develop/maintain.
+* Contributors: Chris I-B, Luis Camero, luis-camero
+
+0.6.6 (2022-05-17)
+------------------
+
+0.6.5 (2022-05-17)
+------------------
+* Added Blackfly entry to install script
+* Added Blackfly launch file
+* Added spinnaker_camera_driver to package.xml
+* Add HUSKY_REALSENSE_TOPIC envar for choosing prefix namespace for all realsense topics
+* Update realsense launch file based on changes from realsense2_camera
+* Contributors: Joey Yang, Luis Camero
+
+0.6.4 (2022-03-21)
+------------------
+* [husky_bringup] Updated compute_calibration script to explicitly use Python3.
+* [husky_bringup] Updated install script to explicitly use Python3.
+* Contributors: Tony Baltovski
+
+0.6.3 (2022-02-17)
+------------------
+* [husky_bringup] Removed udev folder from CMakeLists.txt.
+* Contributors: Tony Baltovski
+
+0.6.2 (2022-02-15)
+------------------
+* Removed HUSKY_IMU_LINK since it can be strictly imu_link
+* Removed udev rules from bringup package
+* Removed references to microstrain_mips, now use ros_mscl
+* Bump CMake version to avoid CMP0048 warning.
+* Remove unnecessary PS4, Logitech udev rules.
+  These were previously removed from Melodic; not sure why they were re-added for Noetic, but I suspect it was a copy-paste error
+* Contributors: Chris I-B, Luis Camero, Tony Baltovski
+
+0.6.1 (2022-01-18)
+------------------
+* Added Hokuyo
+* Contributors: Luis Camero
+
+0.6.0 (2021-09-28)
+------------------
+* Re-added husky_robot from husky.
+* Contributors: Tony Baltovski
 
 0.2.6 (2016-10-03)
 ------------------

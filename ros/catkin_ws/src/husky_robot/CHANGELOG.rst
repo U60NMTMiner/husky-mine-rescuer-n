@@ -2,36 +2,11 @@
 Changelog for package husky_robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.8 (2022-05-19)
+0.5.1 (2021-09-16)
 ------------------
 
-1.0.7 (2022-05-19)
+0.5.0 (2021-08-23)
 ------------------
-
-1.0.6 (2022-05-18)
-------------------
-
-1.0.5 (2022-05-05)
-------------------
-* Uncomment dependency on husky_bringup
-  In light of `husky_bringup` being completed and released, it makes sense to re-enable this dependency.
-* Contributors: Joey Yang
-
-1.0.4 (2022-03-15)
-------------------
-
-1.0.3 (2021-11-30)
-------------------
-
-1.0.2 (2021-11-16)
-------------------
-
-1.0.1 (2021-11-12)
-------------------
-* Bumped verisons of metapackages.
-* [husky_robot] Disabled dependency on husky_bringup.
-* Re-enabled metapackages.
-* Contributors: Tony Baltovski
 
 0.4.4 (2020-08-13)
 ------------------
@@ -68,6 +43,42 @@ Changelog for package husky_robot
 * Updated maintainers.
 * Move packages into monorepo for kinetic; strip out ur packages
 * Contributors: Paul Bovbel, Tony Baltovski
+
+0.6.9 (2023-03-10)
+------------------
+
+0.6.8 (2022-12-01)
+------------------
+
+0.6.7 (2022-06-16)
+------------------
+
+0.6.6 (2022-05-17)
+------------------
+* WIP - Add dependency for husky_tests
+* Contributors: Joey Yang
+
+0.6.5 (2022-05-17)
+------------------
+
+0.6.4 (2022-03-21)
+------------------
+
+0.6.3 (2022-02-17)
+------------------
+
+0.6.2 (2022-02-15)
+------------------
+* Bump CMake version to avoid CMP0048 warning.
+* Contributors: Tony Baltovski
+
+0.6.1 (2022-01-18)
+------------------
+
+0.6.0 (2021-09-28)
+------------------
+* Re-added husky_robot from husky.
+* Contributors: Tony Baltovski
 
 0.2.6 (2016-10-03)
 ------------------

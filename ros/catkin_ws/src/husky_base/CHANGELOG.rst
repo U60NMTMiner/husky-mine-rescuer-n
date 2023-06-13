@@ -2,59 +2,13 @@
 Changelog for package husky_base
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-1.0.8 (2022-05-19)
+0.5.1 (2021-09-16)
 ------------------
+* Eliminate roslint errors
+* Contributors: Lucas Walter, Tony Baltovski
 
-1.0.7 (2022-05-19)
+0.5.0 (2021-08-23)
 ------------------
-* Renamed all launch files to *.launch.py.
-* Contributors: Tony Baltovski
-
-1.0.6 (2022-05-18)
-------------------
-* Added searching for left and right joints rather than assuming order.
-* Contributors: Tony Baltovski
-
-1.0.5 (2022-05-05)
-------------------
-* Split teleop launch into two files since simulation doesn't need actual joystick and will spam warmings.
-* [husky_base] Fixed spawner.py bug.
-* [husky_base] Added missing includes for base_launch.py.
-* Revamped tele-op launch.
-* Fix chnaged dependency in rolling.
-* Contributors: Denis Štogl, Tony Baltovski
-
-1.0.4 (2022-03-15)
-------------------
-* Merge pull request `#191 <https://github.com/husky/husky/issues/191>`_ from StoglRobotics-forks/gazebo-sim-integration-fixes
-  Gazebo sim integration fixes
-* Contributors: Tony Baltovski
-
-1.0.3 (2021-11-30)
-------------------
-* [husky_base] Switched Boost static assert to C++ standard library.
-* Contributors: Tony Baltovski
-
-1.0.2 (2021-11-16)
-------------------
-* Removed unused parameters.
-* [husky_base] Removed duplicate node in launch.
-* Contributors: Tony Baltovski
-
-1.0.1 (2021-11-12)
-------------------
-
-1.0.0 (2021-11-07)
-------------------
-* Initial Gazebo Classic changes.
-* Updates to use ros2_control.
-* [husky_base] Fixed comparison warnings.
-* [husky_base] Fixed logging variable order.
-* [husky_base] Populated hardware states and removed joints struct.
-* Initial attempt at ros2_control.
-* [husky_base] Updated horizon_legacy library for C++11.
-* [husky_base] Linting changes to horizon_legacy library.
-* Contributors: Tony Baltovski
 
 0.4.4 (2020-08-13)
 ------------------
@@ -95,6 +49,42 @@ Changelog for package husky_base
 * Update URDF for multirobot
 * Move packages into monorepo for kinetic; strip out ur packages
 * Contributors: Martin Cote, Paul Bovbel, Tony Baltovski, Wolfgang Merkt
+
+0.6.9 (2023-03-10)
+------------------
+
+0.6.8 (2022-12-01)
+------------------
+* [husky_base] Updated diagnostics for motor and motor driver temperatures.
+* Contributors: Tony Baltovski
+
+0.6.7 (2022-06-16)
+------------------
+
+0.6.6 (2022-05-17)
+------------------
+
+0.6.5 (2022-05-17)
+------------------
+
+0.6.4 (2022-03-21)
+------------------
+
+0.6.3 (2022-02-17)
+------------------
+
+0.6.2 (2022-02-15)
+------------------
+* Bump CMake version to avoid CMP0048 warning.
+* Contributors: Tony Baltovski
+
+0.6.1 (2022-01-18)
+------------------
+
+0.6.0 (2021-09-28)
+------------------
+* Re-added husky_robot from husky.
+* Contributors: Tony Baltovski
 
 0.2.6 (2016-10-03)
 ------------------

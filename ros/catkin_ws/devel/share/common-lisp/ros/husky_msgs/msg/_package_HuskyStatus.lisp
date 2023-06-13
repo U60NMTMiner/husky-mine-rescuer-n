@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/common-lisp/ros/husky_msgs/msg/_package_HuskyStatus.lisp

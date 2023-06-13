@@ -32,11 +32,8 @@
 #ifndef HUSKY_BASE_HORIZON_LEGACY_WRAPPER_H
 #define HUSKY_BASE_HORIZON_LEGACY_WRAPPER_H
 
-#include <iostream>
-#include <memory>
-#include <type_traits>
-
 #include "husky_base/horizon_legacy/clearpath.h"
+#include "boost/type_traits/is_base_of.hpp"
 
 namespace
 {
@@ -57,10 +54,11 @@ namespace horizon_legacy
   template<typename T>
   struct Channel
   {
-    typedef std::shared_ptr<T> Ptr;
-    typedef std::shared_ptr<const T> ConstPtr;
-    static_assert(
-      (std::is_base_of<clearpath::Message, T>::value),
+
+    typedef boost::shared_ptr<T> Ptr;
+    typedef boost::shared_ptr<const T> ConstPtr;
+    BOOST_STATIC_ASSERT_MSG(
+      (boost::is_base_of<clearpath::Message, T>::value),
       "T must be a descendant of clearpath::Message"
     );
 

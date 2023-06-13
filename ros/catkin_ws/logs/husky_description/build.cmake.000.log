@@ -1,0 +1,3 @@
+Not searching for unused variables given on the command line.
+CMake Error: The source directory "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_description" does not appear to contain CMakeLists.txt.
+Specify --help for usage, or press the help button on the CMake GUI.

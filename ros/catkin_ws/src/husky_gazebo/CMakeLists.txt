@@ -1,24 +1,30 @@
-cmake_minimum_required(VERSION 3.5)
-
+cmake_minimum_required(VERSION 3.0.2)
 project(husky_gazebo)
 
-# Default to C++14
-if(NOT CMAKE_CXX_STANDARD)
-  set(CMAKE_CXX_STANDARD 14)
-endif()
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
+find_package(catkin REQUIRED COMPONENTS)
 
-find_package(ament_cmake REQUIRED)
-find_package(urdf REQUIRED)
-find_package(xacro REQUIRED)
+catkin_package()
+
 
 install(
-  DIRECTORY
-    launch worlds
-  DESTINATION
-    share/${PROJECT_NAME}
+  DIRECTORY worlds
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 
-ament_package()
+install(
+  FILES launch/empty_world.launch
+        launch/husky_playpen.launch
+        launch/playpen.launch
+        launch/realsense.launch
+        launch/spawn_husky.launch
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch
+)
+
+if (CATKIN_ENABLE_TESTING)
+  find_package(roslaunch REQUIRED)
+  roslaunch_add_file_check(launch/empty_world.launch)
+  roslaunch_add_file_check(launch/husky_playpen.launch)
+  roslaunch_add_file_check(launch/playpen.launch)
+  roslaunch_add_file_check(launch/realsense.launch)
+  roslaunch_add_file_check(launch/spawn_husky.launch)
+endif()

@@ -1,0 +1,8 @@
+prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/install
+
+Name: husky_viz
+Description: Description of husky_viz
+Version: 0.6.9
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

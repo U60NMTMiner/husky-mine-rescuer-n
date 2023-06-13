@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_navigation/share/husky_navigation/cmake/husky_navigationConfig-version.cmake

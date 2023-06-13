@@ -164,4 +164,5 @@ namespace clearpath
     return retval /= scale;
   }
 
-} // namespace clearpath
+}; // namespace clearpath
+

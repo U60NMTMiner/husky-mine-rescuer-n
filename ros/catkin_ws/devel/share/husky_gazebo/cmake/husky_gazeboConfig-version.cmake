@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_gazebo/share/husky_gazebo/cmake/husky_gazeboConfig-version.cmake

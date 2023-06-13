@@ -19,7 +19,8 @@ RUN apt-get install -y \
 
 # 2. Install ROS packages from apt.
 RUN apt-get install -y \
-  ros-noetic-roscpp
+  ros-noetic-roscpp \
+  ros-noetic-ros-control
 
 # Install visual and debugging tools
 RUN apt-get install -y \
@@ -35,5 +36,5 @@ RUN apt-get install -y \
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
 
 COPY ros /ros
-RUN cd /ros/catkin_ws && /ros/entrypoint.sh catkin build
+#RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
 

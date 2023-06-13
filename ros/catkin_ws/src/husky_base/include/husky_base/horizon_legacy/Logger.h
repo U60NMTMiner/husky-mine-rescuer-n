@@ -71,7 +71,7 @@ namespace clearpath
       INFO,
       DETAIL
     };
-    static const char *levelNames[]; // strings indexed by enumeration.
+    static const char *levelNames[]; // strings indexed by enumeration. 
 
   private:
     Logger();
@@ -98,7 +98,7 @@ namespace clearpath
 
   void loggerTermHandler(int signal);
 
-} // namespace clearpath
+}; // namespace clearpath
 
 // convenience macros
 #define CPR_LOG(level) (clearpath::Logger::instance().entry((level), __FILE__, __LINE__ ))
@@ -109,3 +109,4 @@ namespace clearpath
 #define CPR_DTL()      CPR_LOG(clearpath::Logger::DETAIL)
 
 #endif //CPR_LOGGER_H
+

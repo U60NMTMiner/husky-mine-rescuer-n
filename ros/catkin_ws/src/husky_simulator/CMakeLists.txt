@@ -1,6 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.0.2)
 project(husky_simulator)
-
-find_package(ament_cmake REQUIRED)
-
-ament_package()
+find_package(catkin REQUIRED)
+catkin_metapackage()

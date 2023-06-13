@@ -1,0 +1,5 @@
+husky_description
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_description/cmake.lock /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/./cmake.lock
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_description/share/husky_description/cmake/husky_descriptionConfig.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/husky_description/cmake/husky_descriptionConfig.cmake
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_description/share/husky_description/cmake/husky_descriptionConfig-version.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/husky_description/cmake/husky_descriptionConfig-version.cmake
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_description/lib/pkgconfig/husky_description.pc /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/pkgconfig/husky_description.pc
