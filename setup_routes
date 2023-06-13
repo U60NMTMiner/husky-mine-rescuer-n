@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+
+# Set up routing from the local machine to carl's pi, which is at
+# 10.0.0.100.
+
+CARL_ADDRESS=$(cat /etc/hosts | grep -w carl | cut -d' ' -f1)
+if [ -z "$CARL_ADDRESS" ]; then
+    echo "Please add \"carls-ip  carl\" to /etc/hosts"
+    exit 1
+fi
+
+WIFI_DEV=$(nmcli --get-values GENERAL.DEVICE,GENERAL.TYPE device show | sed '/^wifi/!{h;d;};x' | head -n 1)
+
+sudo ip route add "10.100.0.0/24" via $CARL_ADDRESS dev $WIFI_DEV proto static
