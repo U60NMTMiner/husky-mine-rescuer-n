@@ -23,7 +23,7 @@ CONTAINER_NAME=carl-main
 
 # Build the image.
 if ! $disable_rebuild; then
-    docker build "$DIR" -f "$DIR"/Dockerfile_full_build -t $IMAGE_NAME
+    docker build "$DIR" -f "$DIR"/Dockerfile -t $IMAGE_NAME
 fi
 
 ip_addr=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
