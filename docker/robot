@@ -51,9 +51,13 @@ params=(
     --device-cgroup-rule "c 81:* rmw"
     --device-cgroup-rule "c 189:* rmw"
 
+    # Joystick
+    --device=/dev/input/js0
+
     # Environmental variables
     -e ROS_MASTER_URI=http://$ip_addr:11311
     -e ROS_IP=$ip_addr
+    -e HUSKY_LOGITECH=1
 
     # Name the container.
     --name=$CONTAINER_NAME
@@ -73,3 +77,4 @@ trap cleanup INT
 
 # Set up the ROS core.
 docker run "${params[@]}" $IMAGE_NAME roscore
+docker exec -d $CONTAINER_NAME rosrun husky_bringup install

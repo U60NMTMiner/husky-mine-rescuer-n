@@ -36,7 +36,11 @@ RUN apt-get install -y \
   ros-noetic-robot-upstart \
   ros-noetic-robot-state-publisher \
   ros-noetic-xacro \
-  ros-noetic-velodyne-description
+  ros-noetic-velodyne-description \
+  ros-noetic-robot-localization \
+  ros-noetic-interactive-marker-twist-server \
+  ros-noetic-twist-mux \
+  ros-noeticteleop-twist-joy  
 
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
