@@ -40,7 +40,7 @@ RUN apt-get install -y \
   ros-noetic-robot-localization \
   ros-noetic-interactive-marker-twist-server \
   ros-noetic-twist-mux \
-  ros-noeticteleop-twist-joy  
+  ros-noetic-teleop-twist-joy  
 
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
