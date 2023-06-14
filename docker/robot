@@ -50,6 +50,7 @@ params=(
     # Device rules for accessing Realsense cameras.
     --device-cgroup-rule "c 81:* rmw"
     --device-cgroup-rule "c 189:* rmw"
+    --device=/dev/ttyUSB0
 
     # Environmental variables
     -e ROS_MASTER_URI=http://$ip_addr:11311
