@@ -74,4 +74,5 @@ trap cleanup INT
 
 # Set up the ROS core.
 docker run "${params[@]}" $IMAGE_NAME roscore
-docker exec -d $CONTAINER_NAME rosrun husky_bringup install
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh rosrun husky_bringup install
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch husky_base base.launch 
