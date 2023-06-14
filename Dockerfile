@@ -15,8 +15,9 @@ RUN apt-get install -y \
   tmux \
   python3-catkin-tools \
   python3-rosdep \
+  apt-utils \
   libeigen3-dev
-
+  
 # Install visual and debugging tools
 RUN apt-get install -y \
   ros-noetic-rosbag \
@@ -27,20 +28,25 @@ RUN apt-get install -y \
   ros-noetic-dynamic-reconfigure \
   ros-noetic-rqt-reconfigure
 
-# 2. Install ROS packages from apt.
+# 2. Install ROS packages.
 RUN apt-get install -y \
   ros-noetic-roscpp \
+  ros-noetic-xacro
+
+# Install Husky Dependencies
+RUN apt-get install -y \
   ros-noetic-ros-control \
   ros-noetic-diagnostics \
   ros-noetic-roslint \
   ros-noetic-robot-upstart \
   ros-noetic-robot-state-publisher \
-  ros-noetic-xacro \
   ros-noetic-velodyne-description \
   ros-noetic-robot-localization \
   ros-noetic-interactive-marker-twist-server \
   ros-noetic-twist-mux \
-  ros-noetic-teleop-twist-joy  
+  ros-noetic-teleop-twist-joy \
+  ros-noetic-joy \
+  ros-noetic-joy-teleop
 
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh

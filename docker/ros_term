@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 IFS=$'\n\t'
+#set -x
 
 DIR="$(realpath "$(dirname "$0")")"/..
 CONTAINER_NAME="carl-term"
@@ -12,7 +13,7 @@ disable_rebuild=false
 while getopts 'rdj' OPTION; do
     case "$OPTION" in
         r)
-            CARL_ADDRESS=$(cat /etc/hosts | grep -w carl | cut -d' ' -f1)
+            CARL_ADDRESS=$(cat /etc/hosts | grep -w carl | awk '{print $1;}')
             if [ -z "$CARL_ADDRESS" ]; then
                 echo "Please add \"carls-ip  carl\" to /etc/hosts"
                 exit 1
@@ -36,7 +37,7 @@ while getopts 'rdj' OPTION; do
                     param2=("--device=$file")
                 fi
             done
-            if [ ${#errors[@]} -eq 0 ]; then
+            if [ ${#param2[@]} -eq 0 ]; then
                 echo "No joystick found"
                 exit 1
             fi
