@@ -46,6 +46,7 @@ RUN apt-get install -y \
   ros-noetic-twist-mux \
   ros-noetic-teleop-twist-joy \
   ros-noetic-joy \
+  ros-noetic-joint-state-controller \
   ros-noetic-joy-teleop
 
 # Add /catkin_ws to the ROS environment.
