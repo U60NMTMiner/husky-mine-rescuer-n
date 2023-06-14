@@ -4,7 +4,7 @@ RUN apt-get update -y
 
 RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y libpcl-dev
 # Standard tools
-RUN apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   clang \
   make \
   gcc \
@@ -19,7 +19,7 @@ RUN apt-get install -y \
   libeigen3-dev
   
 # Install visual and debugging tools
-RUN apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-rosbag \
   ros-noetic-plotjuggler \
   ros-noetic-rqt-tf-tree \
@@ -29,12 +29,12 @@ RUN apt-get install -y \
   ros-noetic-rqt-reconfigure
 
 # 2. Install ROS packages.
-RUN apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-roscpp \
   ros-noetic-xacro
 
 # Install Husky Dependencies
-RUN apt-get install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-ros-control \
   ros-noetic-diagnostics \
   ros-noetic-roslint \
@@ -47,6 +47,7 @@ RUN apt-get install -y \
   ros-noetic-teleop-twist-joy \
   ros-noetic-joy \
   ros-noetic-joint-state-controller \
+  ros-noetic-diff-drive-controller \
   ros-noetic-joy-teleop
 
 # Add /catkin_ws to the ROS environment.
