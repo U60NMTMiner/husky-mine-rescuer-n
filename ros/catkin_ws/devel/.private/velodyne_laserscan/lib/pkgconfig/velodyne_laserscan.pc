@@ -1,8 +1,0 @@
-prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_laserscan
-
-Name: velodyne_laserscan
-Description: Description of velodyne_laserscan
-Version: 1.7.0
-Cflags: -I/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_laserscan/include
-Libs: -L${prefix}/lib 
-Requires: sensor_msgs

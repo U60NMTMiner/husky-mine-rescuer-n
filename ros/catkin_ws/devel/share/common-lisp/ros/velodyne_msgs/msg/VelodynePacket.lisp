@@ -1,1 +1,0 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_msgs/share/common-lisp/ros/velodyne_msgs/msg/VelodynePacket.lisp

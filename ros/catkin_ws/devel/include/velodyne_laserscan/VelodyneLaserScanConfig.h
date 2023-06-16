@@ -1,1 +1,0 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_laserscan/include/velodyne_laserscan/VelodyneLaserScanConfig.h
