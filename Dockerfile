@@ -1,10 +1,5 @@
 FROM ros:noetic-ros-core
 
-<<<<<<< HEAD
-COPY docker/install_packages.sh /install_packages.sh
-RUN /install_packages.sh
-
-=======
 RUN apt-get update -y
 
 RUN DEBIAN_FRONTEND='noninteractive' apt-get install -y libpcl-dev
@@ -57,20 +52,15 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-velodyne
->>>>>>> parent of e177cc6... Fixing dependencies
+
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
 
 COPY ros /ros
-<<<<<<< HEAD
 RUN rosdep init
 RUN rosdep fix-permissions
 RUN rosdep update
 RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh rosdep install --from-paths src --ignore-src --rosdistro noetic -y
 #RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
 CMD cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
-=======
-RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
-RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
->>>>>>> parent of e177cc6... Fixing dependencies
 
