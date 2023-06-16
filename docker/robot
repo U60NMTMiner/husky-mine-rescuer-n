@@ -57,6 +57,7 @@ params=(
     -e ROS_IP=$ip_addr
     -e HUSKY_LOGITECH=1
     -e HUSKY_LASER_3D_ENABLED=1
+    -e DISPLAY
 
     # Name the container.
     --name=$CONTAINER_NAME
@@ -78,3 +79,4 @@ trap cleanup INT
 docker run "${params[@]}" $IMAGE_NAME roscore
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh rosrun --wait husky_bringup install
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch --wait husky_base base.launch 
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch roslaunch velodyne_pointcloud VLP16_points.launc
