@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_msgs/share/velodyne_msgs/cmake/velodyne_msgsConfig-version.cmake

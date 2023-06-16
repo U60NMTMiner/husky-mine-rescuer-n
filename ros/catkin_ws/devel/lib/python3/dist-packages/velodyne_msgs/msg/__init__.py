@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_msgs/lib/python3/dist-packages/velodyne_msgs/msg/__init__.py

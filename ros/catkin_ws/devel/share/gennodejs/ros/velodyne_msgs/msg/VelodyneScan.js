@@ -1,0 +1,1 @@
+/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/velodyne_msgs/share/gennodejs/ros/velodyne_msgs/msg/VelodyneScan.js

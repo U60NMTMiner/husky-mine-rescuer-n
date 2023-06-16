@@ -51,11 +51,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-joy-teleop
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  ros-noetic-velodyne
+  ros-noetic-velodyne \
+  ros-noetic-pcl-ros
+
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
 
 COPY ros /ros
+RUN rosdep init
+RUN rosdep fix-permissions
+RUN rosdep update
+RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh rosdep install --from-paths src --ignore-src --rosdistro noetic -y
 RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
 RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
 
