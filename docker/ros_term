@@ -57,6 +57,7 @@ params=(
     -e "QT_X11_NO_MITSHM=1"
     -e "OGRE_RTT_MODE=Copy"
     -e "HUSKY_LOGITECH=1"
+    -e "HUSKY_LASER_3D_ENABLED=1"
     --device-cgroup-rule "c 81:* rmw"
     --device-cgroup-rule "c 189:* rmw"
     --name=$CONTAINER_NAME

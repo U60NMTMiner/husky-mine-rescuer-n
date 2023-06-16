@@ -56,6 +56,7 @@ params=(
     -e ROS_MASTER_URI=http://$ip_addr:11311
     -e ROS_IP=$ip_addr
     -e HUSKY_LOGITECH=1
+    -e HUSKY_LASER_3D_ENABLED=1
 
     # Name the container.
     --name=$CONTAINER_NAME
