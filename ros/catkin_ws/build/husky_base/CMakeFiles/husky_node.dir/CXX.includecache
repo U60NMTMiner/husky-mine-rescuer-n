@@ -116,12 +116,6 @@ husky_msgs/HuskyStatus.h
 string
 -
 
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy_wrapper.cpp
-husky_base/horizon_legacy/clearpath.h
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base/horizon_legacy/clearpath.h
-ros/ros.h
--
-
 /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base.cpp
 husky_base/husky_hardware.h
 /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base/husky_hardware.h
@@ -130,14 +124,6 @@ controller_manager/controller_manager.h
 ros/callback_queue.h
 /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/ros/callback_queue.h
 boost/chrono.hpp
--
-
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_diagnostics.cpp
-husky_base/husky_diagnostics.h
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base/husky_diagnostics.h
-algorithm
--
-limits
 -
 
 /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_hardware.cpp
