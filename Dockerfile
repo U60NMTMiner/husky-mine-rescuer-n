@@ -50,6 +50,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
   ros-noetic-diff-drive-controller \
   ros-noetic-joy-teleop
 
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  ros-noetic-velodyne
 # Add /catkin_ws to the ROS environment.
 COPY ros/ros_entrypoint.sh /ros_entrypoint.sh
 
