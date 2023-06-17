@@ -61,6 +61,6 @@ RUN rosdep init
 RUN rosdep fix-permissions
 RUN rosdep update
 RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh rosdep install --from-paths src --ignore-src --rosdistro noetic -y
-#RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
-CMD cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
+RUN rm -rf /ros/catkin_ws/devel /ros/catkin_ws/build
+RUN cd /ros/catkin_ws && /ros/ros_entrypoint.sh catkin build
 
