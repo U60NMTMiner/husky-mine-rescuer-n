@@ -50,7 +50,8 @@ params=(
     # Device rules for accessing Realsense cameras.
     --device-cgroup-rule "c 81:* rmw"
     --device-cgroup-rule "c 189:* rmw"
-    --device=/dev/ttyUSB0
+   --device=/dev/ttyUSB0
+   --device=/dev/ttyUSB1
 
     # Environmental variables
     -e ROS_MASTER_URI=http://$ip_addr:11311
@@ -79,5 +80,5 @@ trap cleanup INT
 docker run "${params[@]}" $IMAGE_NAME roscore
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh rosrun --wait husky_bringup install
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch --wait husky_base base.launch 
-docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch velodyne_pointcloud VLP16_points.launch
-docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch vectornav vectornav.launch
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch --wait velodyne_pointcloud VLP16_points.launch
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch --wait vectornav vectornav.launch
