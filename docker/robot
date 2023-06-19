@@ -32,6 +32,10 @@ LOG_FILE="/var/log/rosbags/$(date -Iseconds)"
 LOG_DIR="$(dirname "$LOG_FILE")"
 mkdir -p "$LOG_DIR"
 
+# Figure out which usb is which
+HUSKY_PORT=$(basename "$(readlink "/dev/serial/by-id/$(ls /dev/serial/by-id | grep Prolific)")")
+IMU_PORT=$(basename "$(readlink "/dev/serial/by-id/$(ls /dev/serial/by-id | grep FTDI)")")
+
 params=(
     # Detach from the container, and create a fake virtual terminal.
     -dt
@@ -57,7 +61,8 @@ params=(
     -e ROS_MASTER_URI=http://$ip_addr:11311
     -e ROS_IP=$ip_addr
     -e HUSKY_LOGITECH=1
-    -e HUSKY_PORT /dev/ttyUSB1
+    -e HUSKY_PORT /dev/$HUSKY_PORT
+    -e IMU_PORT /dev/$IMU_PORT
     -e HUSKY_LASER_3D_ENABLED=1
     -e DISPLAY
 
