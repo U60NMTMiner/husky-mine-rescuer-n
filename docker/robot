@@ -80,3 +80,4 @@ docker run "${params[@]}" $IMAGE_NAME roscore
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh rosrun --wait husky_bringup install
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch --wait husky_base base.launch 
 docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch velodyne_pointcloud VLP16_points.launch
+docker exec -d $CONTAINER_NAME /ros_entrypoint.sh roslaunch vectornav vectornav.launch
