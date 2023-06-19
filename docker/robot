@@ -50,13 +50,14 @@ params=(
     # Device rules for accessing Realsense cameras.
     --device-cgroup-rule "c 81:* rmw"
     --device-cgroup-rule "c 189:* rmw"
-   --device=/dev/ttyUSB0
-   --device=/dev/ttyUSB1
+    --device=/dev/ttyUSB0
+    --device=/dev/ttyUSB1
 
     # Environmental variables
     -e ROS_MASTER_URI=http://$ip_addr:11311
     -e ROS_IP=$ip_addr
     -e HUSKY_LOGITECH=1
+    -e HUSKY_PORT /dev/ttyUSB1
     -e HUSKY_LASER_3D_ENABLED=1
     -e DISPLAY
 
