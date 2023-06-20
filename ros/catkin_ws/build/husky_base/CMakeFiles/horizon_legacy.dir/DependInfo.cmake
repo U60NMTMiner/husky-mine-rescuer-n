@@ -1,35 +1,22 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Logger.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Logger.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_cmd.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_cmd.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_data.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_data.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_request.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_request.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Number.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Number.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Transport.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Transport.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/crc.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/crc.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/linux_serial.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/linux_serial.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "ROSCONSOLE_BACKEND_LOG4CXX"
-  "ROS_BUILD_SHARED_LIBS=1"
-  "ROS_PACKAGE_NAME=\"husky_base\""
-  "horizon_legacy_EXPORTS"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/include"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/include"
-  "/opt/ros/noetic/include"
-  "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Logger.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Logger.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Logger.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_cmd.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_cmd.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_cmd.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_data.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_data.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_data.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Message_request.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_request.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Message_request.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Number.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Number.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Number.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/Transport.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Transport.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/Transport.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/crc.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/crc.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/crc.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy/linux_serial.cpp" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/linux_serial.cpp.o" "gcc" "husky_base/CMakeFiles/horizon_legacy.dir/src/horizon_legacy/linux_serial.cpp.o.d"
   )
 
 # Targets to which this target links.

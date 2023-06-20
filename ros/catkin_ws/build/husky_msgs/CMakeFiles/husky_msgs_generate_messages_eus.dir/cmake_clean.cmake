@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/roseus/ros/husky_msgs/manifest.l"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/roseus/ros/husky_msgs/msg/HuskyStatus.l"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/roseus/ros/husky_msgs/manifest.l"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/roseus/ros/husky_msgs/msg/HuskyStatus.l"
   "CMakeFiles/husky_msgs_generate_messages_eus"
 )
 

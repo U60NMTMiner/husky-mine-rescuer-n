@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "fath_pivot_mount_description"
-PROJECT_SPACE_DIR = "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/fath_pivot_mount_description"
+PROJECT_SPACE_DIR = "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel"
 PROJECT_VERSION = "0.1.1"

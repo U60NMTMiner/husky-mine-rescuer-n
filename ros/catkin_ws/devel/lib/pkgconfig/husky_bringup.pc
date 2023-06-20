@@ -1,1 +1,8 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_bringup/lib/pkgconfig/husky_bringup.pc
+prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel
+
+Name: husky_bringup
+Description: Description of husky_bringup
+Version: 0.6.9
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

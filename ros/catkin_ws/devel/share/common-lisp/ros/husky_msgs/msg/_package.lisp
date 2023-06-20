@@ -1,1 +1,7 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/common-lisp/ros/husky_msgs/msg/_package.lisp
+(cl:defpackage husky_msgs-msg
+  (:use )
+  (:export
+   "<HUSKYSTATUS>"
+   "HUSKYSTATUS"
+  ))
+

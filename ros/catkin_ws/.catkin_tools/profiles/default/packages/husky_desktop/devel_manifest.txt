@@ -1,2 +1,0 @@
-husky_desktop
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_desktop/cmake.lock /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/./cmake.lock

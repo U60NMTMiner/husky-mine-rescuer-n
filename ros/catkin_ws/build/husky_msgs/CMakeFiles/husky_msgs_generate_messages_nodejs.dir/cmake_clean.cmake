@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/gennodejs/ros/husky_msgs/msg/HuskyStatus.js"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/gennodejs/ros/husky_msgs/msg/HuskyStatus.js"
   "CMakeFiles/husky_msgs_generate_messages_nodejs"
 )
 

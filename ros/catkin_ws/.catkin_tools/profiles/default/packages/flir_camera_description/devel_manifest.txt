@@ -1,5 +1,0 @@
-flir_camera_description
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/cmake.lock /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/./cmake.lock
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/share/flir_camera_description/cmake/flir_camera_descriptionConfig-version.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/flir_camera_description/cmake/flir_camera_descriptionConfig-version.cmake
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/share/flir_camera_description/cmake/flir_camera_descriptionConfig.cmake /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/share/flir_camera_description/cmake/flir_camera_descriptionConfig.cmake
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/lib/pkgconfig/flir_camera_description.pc /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/pkgconfig/flir_camera_description.pc

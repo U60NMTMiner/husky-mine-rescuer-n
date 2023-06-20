@@ -1,2 +1,0 @@
-husky_robot
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_robot/cmake.lock /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/./cmake.lock

@@ -1,1 +1,2 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/share/husky_msgs/cmake/husky_msgs-msg-extras.cmake
+set(husky_msgs_MESSAGE_FILES "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg")
+set(husky_msgs_SERVICE_FILES "")

@@ -1,31 +1,17 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy_wrapper.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/husky_node.dir/src/horizon_legacy_wrapper.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/husky_node.dir/src/husky_base.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_diagnostics.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/husky_node.dir/src/husky_diagnostics.cpp.o"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_hardware.cpp" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/husky_base/CMakeFiles/husky_node.dir/src/husky_hardware.cpp.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "BOOST_ALL_NO_LIB"
-  "BOOST_CHRONO_DYN_LINK"
-  "ROSCONSOLE_BACKEND_LOG4CXX"
-  "ROS_BUILD_SHARED_LIBS=1"
-  "ROS_PACKAGE_NAME=\"husky_base\""
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/include"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/include"
-  "/opt/ros/noetic/include"
-  "/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/horizon_legacy_wrapper.cpp" "husky_base/CMakeFiles/husky_node.dir/src/horizon_legacy_wrapper.cpp.o" "gcc" "husky_base/CMakeFiles/husky_node.dir/src/horizon_legacy_wrapper.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_base.cpp" "husky_base/CMakeFiles/husky_node.dir/src/husky_base.cpp.o" "gcc" "husky_base/CMakeFiles/husky_node.dir/src/husky_base.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_diagnostics.cpp" "husky_base/CMakeFiles/husky_node.dir/src/husky_diagnostics.cpp.o" "gcc" "husky_base/CMakeFiles/husky_node.dir/src/husky_diagnostics.cpp.o.d"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_base/src/husky_hardware.cpp" "husky_base/CMakeFiles/husky_node.dir/src/husky_hardware.cpp.o" "gcc" "husky_base/CMakeFiles/husky_node.dir/src/husky_hardware.cpp.o.d"
   )
 
 # Targets to which this target links.

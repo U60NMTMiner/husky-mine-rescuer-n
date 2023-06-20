@@ -1,8 +1,0 @@
-prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/fath_pivot_mount_description
-
-Name: fath_pivot_mount_description
-Description: Description of fath_pivot_mount_description
-Version: 0.1.1
-Cflags: 
-Libs: -L${prefix}/lib 
-Requires: 

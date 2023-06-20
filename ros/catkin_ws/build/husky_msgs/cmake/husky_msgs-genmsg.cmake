@@ -2,7 +2,7 @@
 
 message(STATUS "husky_msgs: 1 messages, 0 services")
 
-set(MSG_I_FLAGS "-Ihusky_msgs:/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Ihusky_msgs:/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg;-Istd_msgs:/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -31,7 +31,7 @@ add_custom_target(_husky_msgs_generate_messages_check_deps_${_filename}
 _generate_msg_cpp(husky_msgs
   "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/husky_msgs
 )
 
@@ -64,7 +64,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS husky_msgs_generate_messages_cpp)
 _generate_msg_eus(husky_msgs
   "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/husky_msgs
 )
 
@@ -97,7 +97,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS husky_msgs_generate_messages_eus)
 _generate_msg_lisp(husky_msgs
   "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/husky_msgs
 )
 
@@ -130,7 +130,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS husky_msgs_generate_messages_lisp)
 _generate_msg_nodejs(husky_msgs
   "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/husky_msgs
 )
 
@@ -163,7 +163,7 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS husky_msgs_generate_messages_nodejs
 _generate_msg_py(husky_msgs
   "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/husky_msgs/msg/HuskyStatus.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
+  "/nix/store/bm2yplw7cxfdhdiqpmqc4zjx64y42sxp-ros-noetic-std-msgs-0.5.13-r1/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/husky_msgs
 )
 
@@ -238,7 +238,7 @@ if(TARGET std_msgs_generate_messages_nodejs)
 endif()
 
 if(genpy_INSTALL_DIR AND EXISTS ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/husky_msgs)
-  install(CODE "execute_process(COMMAND \"/usr/bin/python3\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/husky_msgs\")")
+  install(CODE "execute_process(COMMAND \"/nix/store/6qk2ybm2yx2dxmx9h4dikr1shjhhbpfr-python3-3.10.11/bin/python3\" -m compileall \"${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/husky_msgs\")")
   # install generated code
   install(
     DIRECTORY ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/husky_msgs

@@ -1,6 +1,6 @@
 file(REMOVE_RECURSE
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/lib/python3/dist-packages/husky_msgs/msg/_HuskyStatus.py"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/husky_msgs/lib/python3/dist-packages/husky_msgs/msg/__init__.py"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/python3/dist-packages/husky_msgs/msg/_HuskyStatus.py"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/python3/dist-packages/husky_msgs/msg/__init__.py"
   "CMakeFiles/husky_msgs_generate_messages_py"
 )
 

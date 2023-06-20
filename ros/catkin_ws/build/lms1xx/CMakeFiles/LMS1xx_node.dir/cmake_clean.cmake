@@ -1,7 +1,8 @@
 file(REMOVE_RECURSE
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/lms1xx/lib/lms1xx/LMS1xx_node"
-  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/lms1xx/lib/lms1xx/LMS1xx_node.pdb"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/lms1xx/LMS1xx_node"
+  "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/lib/lms1xx/LMS1xx_node.pdb"
   "CMakeFiles/LMS1xx_node.dir/src/LMS1xx_node.cpp.o"
+  "CMakeFiles/LMS1xx_node.dir/src/LMS1xx_node.cpp.o.d"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -1,0 +1,8 @@
+# CMake generated Testfile for 
+# Source directory: /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/velodyne/velodyne_pcl
+# Build directory: /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/velodyne/velodyne_pcl
+# 
+# This file includes the relevant testing commands required for 
+# testing this directory and lists subdirectories to be tested as well.
+add_test(_ctest_velodyne_pcl_roslint_package "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/catkin_generated/env_cached.sh" "/nix/store/6qk2ybm2yx2dxmx9h4dikr1shjhhbpfr-python3-3.10.11/bin/python3" "/nix/store/y2dbjs0hpkdmra1jcnvih069nq27j9ka-ros-noetic-catkin-0.8.10-r1/share/catkin/cmake/test/run_tests.py" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/test_results/velodyne_pcl/roslint-velodyne_pcl.xml" "--working-dir" "/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/velodyne/velodyne_pcl" "--return-code" "/nix/store/gimjz2k8rmpmmrbggh1s0880yarm5580-ros-env/share/roslint/cmake/../../../lib/roslint/test_wrapper /home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/build/test_results/velodyne_pcl/roslint-velodyne_pcl.xml make roslint_velodyne_pcl")
+set_tests_properties(_ctest_velodyne_pcl_roslint_package PROPERTIES  _BACKTRACE_TRIPLES "/nix/store/y2dbjs0hpkdmra1jcnvih069nq27j9ka-ros-noetic-catkin-0.8.10-r1/share/catkin/cmake/test/tests.cmake;160;add_test;/nix/store/gimjz2k8rmpmmrbggh1s0880yarm5580-ros-env/share/roslint/cmake/roslint-extras.cmake;67;catkin_run_tests_target;/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/velodyne/velodyne_pcl/CMakeLists.txt;9;roslint_add_test;/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/src/velodyne/velodyne_pcl/CMakeLists.txt;0;")

@@ -1,1 +1,8 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/flir_camera_description/lib/pkgconfig/flir_camera_description.pc
+prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel
+
+Name: flir_camera_description
+Description: Description of flir_camera_description
+Version: 0.2.5
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

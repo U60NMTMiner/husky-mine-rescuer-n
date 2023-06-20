@@ -1,1 +1,8 @@
-/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel/.private/lms1xx/lib/pkgconfig/lms1xx.pc
+prefix=/home/ndev/Documents/husky-mine-rescuer/ros/catkin_ws/devel
+
+Name: lms1xx
+Description: Description of lms1xx
+Version: 0.3.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: roscpp
