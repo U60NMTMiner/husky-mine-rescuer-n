@@ -1,0 +1,98 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+#set -x
+
+DIR="$(realpath "$(dirname "$0")")"/..
+CONTAINER_NAME="carl-term"
+
+# if -r, enable remote support; if -d, disable rebuilding.
+param1=()
+param2=()
+disable_rebuild=false
+while getopts 'rdj' OPTION; do
+    case "$OPTION" in
+        r)
+            CARL_ADDRESS=$(cat /etc/hosts | grep -w carl | awk '{print $1;}')
+            if [ -z "$CARL_ADDRESS" ]; then
+                echo "Please add \"carls-ip  carl\" to /etc/hosts"
+                exit 1
+            fi
+            # Some of us have more than one wireless card
+            MY_ADDRESS=$(ip route get $CARL_ADDRESS | sed 's/.* src //;s/ .*//;2,$d')
+
+            param1=(
+                -e ROS_IP=$MY_ADDRESS
+                -e ROS_MASTER_URI=http://jetson:11311
+            )
+            ;;
+
+        d)
+            disable_rebuild=true
+            ;;
+        j)
+            for ((c=32; c>=0; c--)); do
+                file="/dev/input/js$c"
+                if [ -e $file ]; then
+                    param2=("--device=$file")
+                fi
+            done
+            if [ ${#param2[@]} -eq 0 ]; then
+                echo "No joystick found"
+                exit 1
+            fi
+            ;;
+    esac
+done
+
+params=(
+    --rm
+    -it
+    --network=host
+    --privileged
+    -v $DIR:$DIR
+    -e DISPLAY
+    -v /tmp/.X11-unix:/tmp/.X11-unix:rw
+    -v /dev:/dev:rw
+    -e "QT_X11_NO_MITSHM=1"
+    -e "OGRE_RTT_MODE=Copy"
+    -e "HUSKY_LOGITECH=1"
+    -e "HUSKY_LASER_3D_ENABLED=1"
+    --device-cgroup-rule "c 81:* rmw"
+    --device-cgroup-rule "c 189:* rmw"
+    --name=$CONTAINER_NAME
+    "${param1[@]}"
+    "${param2[@]}"
+)
+
+if ! $disable_rebuild; then
+    sudo docker build "$DIR" -t $CONTAINER_NAME
+fi
+
+# Clean up the container if it's already running.
+sudo docker stop $CONTAINER_NAME &>/dev/null || true
+sudo docker rm $CONTAINER_NAME  &>/dev/null || true
+
+# Clean up on ctrl-C.
+cleanup () {
+    sudo docker stop $CONTAINER_NAME || true
+    sudo docker rm $CONTAINER_NAME || true
+    exit 1
+}
+trap cleanup INT
+
+sudo docker run \
+    "${params[@]}" \
+    $CONTAINER_NAME \
+    bash -c "
+        cd $PWD
+        export HOME="$HOME"
+        export PS1='\u@\h:\w\$ '
+        . /opt/ros/noetic/setup.bash
+        [ -e $DIR/ros/catkin_ws/devel/setup.bash ] && . $DIR/ros/catkin_ws/devel/setup.bash
+        bash
+    "
+
+# ROS might create files owned by root here; it'll cause all kinds of
+# problems with git.
+sudo chown -R "$(id -u):$(id -g)" "$DIR/.."
