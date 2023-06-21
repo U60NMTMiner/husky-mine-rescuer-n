@@ -11,7 +11,6 @@ mkShell {
     git
     tmux
     catkin-tools
-    rosdep
     eigen
     glibcLocales
     pcl
@@ -36,6 +35,8 @@ mkShell {
       teleop-twist-keyboard
       move-base
       base-local-planner
+      controller-manager
+      roslint
     ]; })
   ];
   shellHook = ''
@@ -54,7 +55,5 @@ mkShell {
     else
       export ROS_MASTER_URI=http://jetson:11311
     fi
-    cd ros/catkin_ws
-    catkin_make
   '';
 }

@@ -1,3 +1,5 @@
-ros/catkin_ws/src/build/
-ros/catkin_ws/src/devel/
-ros/catkin_ws/src/logs/
+ros/catkin_ws/build/
+ros/catkin_ws/devel/
+ros/catkin_ws/logs/
+ros/catkin_ws/.catkin_tools/
+ros/catkin_ws/.catkin_workspace
