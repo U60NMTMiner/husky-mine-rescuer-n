@@ -9,6 +9,7 @@ apt-get upgrade -y
 
 # Standard tools
 apt-get install -y \
+  apt-utils \
   libpcl-dev \
   clang \
   make \
