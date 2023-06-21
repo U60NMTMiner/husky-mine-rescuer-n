@@ -13,9 +13,9 @@ disable_rebuild=false
 while getopts 'rdj' OPTION; do
     case "$OPTION" in
         r)
-            CARL_ADDRESS=$(cat /etc/hosts | grep -w carl | awk '{print $1;}')
+            CARL_ADDRESS=$(cat /etc/hosts | grep -w husky | awk '{print $1;}')
             if [ -z "$CARL_ADDRESS" ]; then
-                echo "Please add \"carls-ip  carl\" to /etc/hosts"
+                echo "Script expects husky in /etc/hosts"
                 exit 1
             fi
             # Some of us have more than one wireless card
@@ -86,7 +86,7 @@ sudo docker run \
     $CONTAINER_NAME \
     bash -c "
         cd $PWD
-        export HOME="$HOME"
+        export HOME=$HOME
         export PS1='\u@\h:\w\$ '
         . /opt/ros/noetic/setup.bash
         [ -e $DIR/ros/catkin_ws/devel/setup.bash ] && . $DIR/ros/catkin_ws/devel/setup.bash

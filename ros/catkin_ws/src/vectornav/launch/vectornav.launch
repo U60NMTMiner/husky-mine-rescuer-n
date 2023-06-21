@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+	<remap from="/vectornav/IMU" to="/imu/data"/>
 	<arg name="frame_id" default="vectornav"/>
 	<arg name="serial_port" defualt="$(optenv IMU_PORT /dev/ttyUSB0)"/>
 
