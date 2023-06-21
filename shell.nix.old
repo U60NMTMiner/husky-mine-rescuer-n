@@ -17,16 +17,13 @@ mkShell {
     pcl
     libyaml
     scipy
+    rviz
     (buildEnv { paths = [
       rosbash
       roscpp
       xacro
 	    rosbag
-      plotjuggler
-      rqt-tf-tree
-      rqt-plot
       rqt-image-view 
-      dynamic-reconfigure
       rqt-reconfigure
       ros-control
       diagnostics
@@ -41,14 +38,10 @@ mkShell {
       joy
       joint-state-controller
       diff-drive-controller
-      joy-teleop
       velodyne
       realsense2-description
       joint-state-publisher
       joint-state-publisher-gui
-      rviz
-      rviz-imu-plugin
-      rqt-robot-monitor
       pcl-ros
       joint-trajectory-controller
       teleop-twist-keyboard
@@ -57,22 +50,28 @@ mkShell {
       nmea-comms
       nmea-navsat-driver
       realsense2-camera
-      um7
-      urg-node
-      gazebo-plugins
-      gazebo-ros
-      gazebo-ros-control
-      hector-gazebo-plugins
       pointcloud-to-laserscan
-      velodyne-gazebo-plugins
-      amcl
-      gmapping
-      map-server
       move-base
-      navfn
       base-local-planner
-      dwa-local-planner
-      python-qt-binding
     ]; })
   ];
+  shellHook = ''
+    # Get active IP address
+    ip_addr=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+    export ROS_IP=$ip_addr
+    export HUSKY_LOGITECH=1
+    export HUSKY_LASER_3D_ENABLED=1
+    if [ "$(hostname)" = "husky" ]; then
+      export ROS_MASTER_URI=http://$ip_addr:11311
+      # Figure out which usb is which
+      HUSKY_PORT=$(basename "$(readlink "/dev/serial/by-id/$(ls /dev/serial/by-id | grep Prolific)")")
+      IMU_PORT=$(basename "$(readlink "/dev/serial/by-id/$(ls /dev/serial/by-id | grep FTDI)")")
+      export HUSKY_PORT=/dev/$HUSKY_PORT
+      export IMU_PORT=/dev/$IMU_PORT
+    else
+      export ROS_MASTER_URI=http://jetson:11311
+    fi
+    cd ros/catkin_ws
+    catkin_make
+  '';
 }
