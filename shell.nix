@@ -54,6 +54,7 @@ mkShell {
       export IMU_PORT=/dev/$IMU_PORT
     else
       export ROS_MASTER_URI=http://jetson:11311
+      alias start_joy="roslaunch husky_teleop teleop.launch"
     fi
   '';
 }
