@@ -42,5 +42,5 @@ mkShell {
   name = "ros-term";
   version = "0.2";
   src = /home/ndev/Documents/husky;
-  shellHook = "source builder.sh";
+  shellHook = "source scripts/builder.sh";
 }
