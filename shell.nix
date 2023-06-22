@@ -37,6 +37,8 @@ mkShell {
       base-local-planner
       controller-manager
       roslint
+      eigen-conversions
+      robot-localization
     ]; })
   ];
   name = "ros-term";

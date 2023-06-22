@@ -15,6 +15,7 @@ else
   export ROS_MASTER_URI=http://jetson:11311
   alias start_joy="roslaunch husky_teleop teleop.launch"
 fi
+
 cd ros/catkin_ws
 if [ -e "devel/setup.bash"]; then
   source devel/setup.bash
