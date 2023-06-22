@@ -11,7 +11,6 @@ mkShell {
     git
     tmux
     catkin-tools
-    eigen
     glibcLocales
     pcl
     libyaml
@@ -25,6 +24,7 @@ mkShell {
       rqt-reconfigure
       robot-state-publisher
       robot-localization
+      interactive-marker-twist-server
       velodyne-description
       teleop-twist-joy
       joy
