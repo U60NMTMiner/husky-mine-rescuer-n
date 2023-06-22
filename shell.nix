@@ -24,6 +24,7 @@ mkShell {
       rosbag
       rqt-reconfigure
       robot-state-publisher
+      robot-localization
       velodyne-description
       teleop-twist-joy
       joy
