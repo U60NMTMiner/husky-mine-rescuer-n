@@ -18,11 +18,29 @@ mkShell {
     rviz
     (buildEnv { paths = [
       ros-core
+      genmsg
+      twist-mux
+      diagnostic-aggregator
+      dwa-local-planner
+      urg-node
+      realsense2-description
+      robot-localization
+      velodyne-gazebo-plugins
+      rqt-robot-monitor
+      tf2
+      joint-trajectory-controller
+      map-server
+      pointcloud-to-laserscan
+      robot-localization
+      geographic-msgs
       rosbash
       roscpp
       xacro
       rosbag
       rqt-reconfigure
+      gmapping
+      amcl
+      um7
       robot-state-publisher
       interactive-marker-twist-server
       velodyne-description
