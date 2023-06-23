@@ -16,6 +16,7 @@ mkShell {
     libyaml
     scipy
     rviz
+    geographiclib
     (buildEnv { paths = [
       ros-core
       genmsg
