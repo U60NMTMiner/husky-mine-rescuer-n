@@ -24,7 +24,6 @@ mkShell {
       dwa-local-planner
       urg-node
       realsense2-description
-      robot-localization
       velodyne-gazebo-plugins
       rqt-robot-monitor
       tf2
