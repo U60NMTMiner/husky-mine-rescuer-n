@@ -56,6 +56,7 @@ mkShell {
       controller-manager
       roslint
       eigen-conversions
+      spdlog
     ]; })
   ];
   name = "ros-term";
