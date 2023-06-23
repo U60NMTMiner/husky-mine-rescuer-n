@@ -17,6 +17,7 @@ mkShell {
     scipy
     rviz
     (buildEnv { paths = [
+      ros-core
       rosbash
       roscpp
       xacro
@@ -38,7 +39,6 @@ mkShell {
       controller-manager
       roslint
       eigen-conversions
-      robot-localization
     ]; })
   ];
   name = "ros-term";
