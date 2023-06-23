@@ -16,8 +16,8 @@ mkShell {
     libyaml
     scipy
     rviz
-    geographiclib
     (buildEnv { paths = [
+      geographiclib
       ros-core
       genmsg
       twist-mux
