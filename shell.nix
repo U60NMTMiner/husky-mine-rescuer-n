@@ -30,7 +30,6 @@ mkShell {
       joint-trajectory-controller
       map-server
       pointcloud-to-laserscan
-      robot-localization
       geographic-msgs
       rosbash
       roscpp
