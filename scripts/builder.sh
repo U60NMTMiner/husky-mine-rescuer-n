@@ -17,8 +17,10 @@ else
 fi
 
 cd ros/catkin_ws
-if [ -e "devel/setup.bash"]; then
+if [ -e "devel/setup.bash" ]; then
   source devel/setup.bash
 else
   echo "Please catkin_make and source devel/setup.bash"
 fi
+
+alias cake="catkin_make --cmake-args -DCMAKE_BUILD_TYPE=Release"
