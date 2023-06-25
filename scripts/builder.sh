@@ -12,13 +12,13 @@ if [ "$(hostname)" = "husky" ]; then
   export HUSKY_PORT=/dev/$HUSKY_PORT
   export IMU_PORT=/dev/$IMU_PORT
 else
-  export ROS_MASTER_URI=http://jetson:11311
+  export ROS_MASTER_URI=http://husky:11311
   alias start_joy="roslaunch husky_teleop teleop.launch"
 fi
 
-cd ros/catkin_ws
-if [ -e "devel/setup.bash" ]; then
-  source devel/setup.bash
+SETUP="../ros/catkin_ws/devel/setup.bash"
+if [ -e "$SETUP" ]; then
+  source $SETUP
 else
   echo "Please catkin_make and source devel/setup.bash"
 fi

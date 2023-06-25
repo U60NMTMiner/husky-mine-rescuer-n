@@ -16,8 +16,8 @@ mkShell {
     libyaml
     scipy
     rviz
+    spdlog
     (buildEnv { paths = [
-      geographiclib
       ros-core
       genmsg
       twist-mux
@@ -56,7 +56,6 @@ mkShell {
       controller-manager
       roslint
       eigen-conversions
-      spdlog
     ]; })
   ];
   name = "ros-term";
