@@ -140,14 +140,6 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <!--
       T265 Link
   -->
-  <link name="t265_odom_frame" />
-  <link name="map" />
-  <joint name="t265_odom_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="map" />
-    <child link="t265_odom_frame" />
-  </joint>
-
   <link name="t265_pose_frame" />
   <joint name="t265_pose_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
