@@ -65,6 +65,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <node pkg="tf2_ros" type="static_transform_publisher"
         name="static_transform_publisher"
         args="0 0 0 0 0 0 map t265_odom_frame" respawn="true" />
+    <node pkg="tf2_ros" type="static_transform_publisher"
+        name="static_transform_publisher"
+        args="0 0 0 0 0 0 t265_odom_frame odom" respawn="true" />
     <include file="$(find realsense2_camera)/launch/rs_t265.launch">
         <arg name="camera" value="t265" />
         <arg name="initial_reset" value="true" />
