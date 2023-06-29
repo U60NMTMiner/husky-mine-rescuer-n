@@ -26,9 +26,7 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <launch>
-    <arg name="port" default="$(optenv HUSKY_PORT /dev/ttyUSB0)" />
-    <arg name="sensor_hostname" default="ouster" />
-    <arg name="viz" default="false" />
+    <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" />
 
     <!-- Husky harware driver -->
     <node pkg="husky_base" type="husky_node" name="husky_node">
@@ -49,30 +47,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <include file="$(find husky_control)/launch/control.launch" />
 
     <!--Teleop -->
-    <!--include file="$(find husky_control)/launch/teleop.launch" /-->
+    <include file="$(find husky_control)/launch/teleop.launch" />
 
     <!-- Diagnostic Aggregator -->
     <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
         <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
     </node>
-
-    <!-- Lidar and IMU -->
-    <include file="$(find ouster_ros)/launch/sensor.launch">
-        <arg name="sensor_hostname" value="$(arg sensor_hostname)" />
-        <arg name="viz" value="$(arg viz)" />
-    </include>
-
-    <node pkg="tf2_ros" type="static_transform_publisher"
-        name="map_to_odom"
-        args="0 0 0 0 0 0 map odom" respawn="true" />
-    <node pkg="tf2_ros" type="static_transform_publisher"
-        name="odom_to_t265"
-        args="0 0 0 0 0 0 odom t265_odom_frame" respawn="true" />
-    <include file="$(find realsense2_camera)/launch/rs_t265.launch">
-        <arg name="camera" value="t265" />
-        <arg name="initial_reset" value="true" />
-        <arg name="reconnect_timeout" value="10" />
-    </include>
-    <!--include file="$(find vectornav)/launch/vectornav.launch" /-->
 
 </launch>
