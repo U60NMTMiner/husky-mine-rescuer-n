@@ -73,8 +73,10 @@ namespace serial
                 fprintf(stderr, "%s is not a serial port\n", port_name);
                 return -3;
             }
-            fprintf(stderr, "%s failed to open with error %i. Retrying...\n",
-                port_name.c_str(), fd);
+            if (fd < 0) {
+                fprintf(stderr, "%s failed to open with error %i. Retrying...\n",
+                    port_name.c_str(), fd);
+            }
         }
         
         struct termios options;

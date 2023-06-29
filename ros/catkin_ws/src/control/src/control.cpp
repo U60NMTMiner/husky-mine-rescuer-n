@@ -61,7 +61,7 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg)
     double right = msg->linear.x + msg->angular.z;
     left = clip(left, max_speed, -max_speed);
     right = clip(right, max_speed, -max_speed);
-    ROS_DEBUG_STREAM("Control: Sending Speed (L: "
+    ROS_INFO_STREAM("Control: Sending Speed (L: "
             << left << ", R: " << right << ")");
 
     // Sending
