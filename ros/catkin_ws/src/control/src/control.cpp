@@ -4,7 +4,6 @@
 #include <ros/console.h>
 #include <geometry_msgs/Twist.h>
 
-ros::NodeHandle nh, private_nh("~");
 
 // ROS Parameters
 double max_accel, max_speed;
@@ -29,6 +28,7 @@ int main(int argc, char **argv)
 {
     // Setup ROS
     ros::init(argc, argv, "control");
+    ros::NodeHandle nh, private_nh("~");
 
     private_nh.param<double>("max_accel", max_accel, 5.0);
     private_nh.param<double>("max_speed", max_speed, 1.0);
