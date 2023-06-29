@@ -1,4 +1,4 @@
-odom_frame: t265_odom_frame
+odom_frame: odom
 base_link_frame: base_link
 world_frame: map
 
