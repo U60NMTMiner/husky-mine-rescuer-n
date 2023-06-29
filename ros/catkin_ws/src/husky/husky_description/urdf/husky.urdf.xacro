@@ -140,11 +140,11 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <!--
       T265 Link
   -->
-  <link name="t265_pose_frame" />
+  <link name="t265_link" />
   <joint name="t265_pose_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="t265_pose_frame" />
+    <origin xyz="0 -17.8 -9.65" rpy="0 0 0" />
+    <child link="base_link" />
+    <parent link="t265_link" />
   </joint>
 
   <!--
