@@ -3,6 +3,8 @@
 set -eou pipefail
 export DEBIAN_FRONTEND='noninteractive'
 
+add-apt-repository -y ppa:borglab/gtsam-release-4.0
+
 apt-get update -y
 apt-get upgrade -y
 
@@ -16,9 +18,18 @@ apt-get install -y ros-noetic-twist-mux
 apt-get install -y ros-noetic-roslint
 apt-get install -y ros-noetic-rviz
 apt-get install -y ros-noetic-pcl-ros
+apt-get install -y ros-noetic-navigation
+apt-get install -y ros-noetic-robot-localization
+apt-get install -y ros-noetic-robot-state-publisher
+apt-get install -y ros-noetic-cv-bridge
+apt-get install -y ros-noetic-tf2-tools
+
 apt-get install -y python3-scipy
 apt-get install -y libcurl4-openssl-dev
 apt-get install -y libspdlog-dev
 apt-get install -y libjsoncpp-dev
 apt-get install -y libpcl-dev
 apt-get install -y libpcap0.8-dev
+apt-get install -y libgtsam-dev 
+apt-get install -y libgtsam-unstable-dev
+apt-get install -y libcv-bridge-dev

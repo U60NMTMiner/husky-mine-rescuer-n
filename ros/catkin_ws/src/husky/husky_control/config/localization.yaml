@@ -1,6 +1,6 @@
-odom_frame: odom
+odom_frame: t265_odom_frame
 base_link_frame: base_link
-world_frame: odom
+world_frame: map
 
 two_d_mode: true
 
