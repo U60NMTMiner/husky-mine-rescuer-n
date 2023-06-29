@@ -129,13 +129,13 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <!--
       IMU Link: Standard location to add an IMU
-  -->
   <link name="imu_link" />
   <joint name="imu_joint" type="fixed">
     <origin xyz="$(arg imu_xyz)" rpy="$(arg imu_rpy)" />
     <parent link="$(arg imu_parent)" />
     <child link="imu_link" />
   </joint>
+  -->
 
   <!--
       T265 Link
@@ -143,7 +143,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <link name="t265_pose_frame" />
   <joint name="t265_pose_joint" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0" />
-    <parent link="imu_link" />
+    <parent link="base_link" />
     <child link="t265_pose_frame" />
   </joint>
 
