@@ -28,7 +28,7 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
   <xacro:arg name="imu_xyz"     default="$(optenv HUSKY_IMU_XYZ -0.01651 0 -0.022225)"/>
   <!--xacro:arg name="imu_xyz"     default="$(optenv HUSKY_IMU_XYZ 0 17.8 9.65)"/-->
   <xacro:arg name="imu_rpy"     default="$(optenv HUSKY_IMU_RPY 0 0 0)"/>
-  <xacro:arg name="imu_parent"  default="$(optenv HUSKY_IMU_PARENT base_link)"/>
+  <xacro:arg name="imu_parent"  default="$(optenv HUSKY_IMU_PARENT sensor_arch_link)"/>
 
   <!-- Ouster LiDAR -->
   <xacro:arg name="laser_3d_xyz"     default="$(optenv HUSKY_LASER_3D_XYZ 0 0 0.0605282)" />

@@ -11,7 +11,7 @@ async_output_rate: 40
 fixed_imu_rate: 800
 
 # Frame id where pose of Odom message is specified (used only for Odom header.frame_id)
-map_frame_id: map
+map_frame_id: odom
 
 # Frame id of the sensor (used for header.frame_id of other messages and for Odom child_frame_id)
 frame_id: imu_link
