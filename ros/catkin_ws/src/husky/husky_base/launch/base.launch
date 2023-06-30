@@ -63,6 +63,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
     </include>
 
-    <include file="$(find vectornav)/launch/vectornav.launch" />
+    <!--include file="$(find vectornav)/launch/vectornav.launch" /-->
 
 </launch>
