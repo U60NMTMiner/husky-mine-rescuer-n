@@ -60,6 +60,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <include file="$(find ouster_ros)/launch/sensor.launch">
         <arg name="sensor_hostname" value="$(arg sensor_hostname)" />
         <arg name="viz" value="$(arg viz)" />
+        <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
     </include>
 
     <include file="$(find vectornav)/launch/vectornav.launch" />
