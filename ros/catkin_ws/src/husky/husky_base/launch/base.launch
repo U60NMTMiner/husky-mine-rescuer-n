@@ -62,11 +62,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <arg name="viz" value="$(arg viz)" />
     </include>
 
-    <include file="$(find realsense2_camera)/launch/rs_t265.launch">
-        <arg name="camera" value="t265" />
-        <arg name="initial_reset" value="true" />
-        <arg name="reconnect_timeout" value="10" />
-    </include>
-    <!--include file="$(find vectornav)/launch/vectornav.launch" /-->
+    <include file="$(find vectornav)/launch/vectornav.launch" />
 
 </launch>

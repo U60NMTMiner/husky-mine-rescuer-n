@@ -6,6 +6,7 @@
 
 	<node pkg="vectornav" type="vnpub" name="vectornav" output="screen" >
 	  <param name="frame_id" value="$(arg frame_id)"/>
+	  <param name="serial_port" value="$(arg serial_port)"/>
       <rosparam command="load" file="$(find vectornav)/params/vn100.yaml" />
 	</node>	
 	
