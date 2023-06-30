@@ -26,6 +26,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 <launch>
 
   <arg name="robot_namespace" default="/"/>
+  <!--node pkg="tf2_ros" type="static_transform_publisher"
+      name="map_to_odom"
+      args="0 0 0 0 0 0 map odom" respawn="true" /-->
+  <node pkg="tf2_ros" type="static_transform_publisher"
+      name="odom_to_t265"
+      args="0 0 0 0 0 0 map t265_odom_frame" respawn="true" />
 
   <param name="robot_description" command="$(find xacro)/xacro '$(find husky_description)/urdf/husky.urdf.xacro'
     robot_namespace:=$(arg robot_namespace)" />

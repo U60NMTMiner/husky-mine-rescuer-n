@@ -25,10 +25,10 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 -->
 <robot name="husky" xmlns:xacro="http://ros.org/wiki/xacro">
   <!-- IMU Link -->
-  <!-- xacro:arg name="imu_xyz"     default="$(optenv HUSKY_IMU_XYZ -0.01651 0 -0.022225)"/ -->
   <xacro:arg name="imu_xyz"     default="$(optenv HUSKY_IMU_XYZ -0.01651 0 -0.022225)"/>
+  <!--xacro:arg name="imu_xyz"     default="$(optenv HUSKY_IMU_XYZ 0 17.8 9.65)"/-->
   <xacro:arg name="imu_rpy"     default="$(optenv HUSKY_IMU_RPY 0 0 0)"/>
-  <xacro:arg name="imu_parent"  default="$(optenv HUSKY_IMU_PARENT sensor_arch_link)"/>
+  <xacro:arg name="imu_parent"  default="$(optenv HUSKY_IMU_PARENT base_link)"/>
 
   <!-- Ouster LiDAR -->
   <xacro:arg name="laser_3d_xyz"     default="$(optenv HUSKY_LASER_3D_XYZ 0 0 0.0605282)" />
@@ -129,22 +129,12 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSI
 
   <!--
       IMU Link: Standard location to add an IMU
+  -->
   <link name="imu_link" />
   <joint name="imu_joint" type="fixed">
     <origin xyz="$(arg imu_xyz)" rpy="$(arg imu_rpy)" />
     <parent link="$(arg imu_parent)" />
     <child link="imu_link" />
-  </joint>
-  -->
-
-  <!--
-      T265 Link
-  -->
-  <link name="t265_pose_frame" />
-  <joint name="t265_pose_joint" type="fixed">
-    <origin xyz="0 17.8 9.65" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="t265_pose_frame" />
   </joint>
 
   <!--
