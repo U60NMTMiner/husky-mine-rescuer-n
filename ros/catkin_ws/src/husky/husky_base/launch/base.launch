@@ -57,7 +57,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </node>
 
     <!-- Lidar and IMU -->
-    <include file="$(find vectornav)/launch/vectornav.launch" />
+    <--include file="$(find vectornav)/launch/vectornav.launch" / -->
 
     <include file="$(find ouster_ros)/launch/sensor.launch">
         <arg name="sensor_hostname" value="$(arg sensor_hostname)" />
