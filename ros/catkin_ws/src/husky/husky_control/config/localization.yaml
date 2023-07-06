@@ -3,7 +3,7 @@ base_link_frame: base_link
 world_frame: odom
 
 publish_tf: true
-publish_acceleration: true
+#publish_acceleration: true
 
 two_d_mode: false
 
