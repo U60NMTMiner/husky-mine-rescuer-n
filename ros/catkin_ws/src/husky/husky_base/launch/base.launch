@@ -64,4 +64,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <arg name="viz" value="$(arg viz)" />
         <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
     </include>
+
+    <include file="$(find lio_sam)/launch/run.launch" />
 </launch>
