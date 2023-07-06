@@ -40,8 +40,8 @@ double polling_timeout;
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg)
 {
-  double left = msg->linear.x + msg->linear.z;
-  double right = msg->linear.x - msg->linear.z;
+  double left = msg->linear.x - msg->angular.z;
+  double right = msg->linear.x + msg->angular.z;
   double large = (left > right) ? left : right;
   if ( large > max_speed )
   {
