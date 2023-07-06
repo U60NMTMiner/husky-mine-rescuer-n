@@ -7,11 +7,9 @@
     <!-- Parameters -->
     <rosparam file="$(find lio_sam)/config/params.yaml" command="load" />
 
-    <!--- LOAM -->
-    <include file="$(find lio_sam)/launch/include/module_loam.launch" />
-
     <!--- Robot State TF -->
-    <include file="$(find lio_sam)/launch/include/module_robot_state_publisher.launch" />
+    <param name="robot_description" command="$(find xacro)/xacro $(find husky_description)/urdf/husky.urdf.xacro" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" />
 
     <!-- Ouster -->
     <include file="$(find ouster_ros)/launch/sensor.launch">
@@ -21,7 +19,12 @@
     </include>
 
     <!--- Run Navsat -->
-    <include file="$(find lio_sam)/launch/include/module_navsat.launch" />
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_localization_node" respawn="true">
+        <rosparam file="$(find lio_sam)/config/ekf.yaml" command="load" />
+    </node>
+
+    <!--- LOAM -->
+    <include file="$(find lio_sam)/launch/include/module_loam.launch" />
 
     <!--- Run Rviz-->
     <!-- include file="$(find lio_sam)/launch/include/module_rviz.launch" /-->

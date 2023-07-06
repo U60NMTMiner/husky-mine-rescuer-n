@@ -10,7 +10,7 @@ lio_sam:
   lidarFrame: "os_sensor"
   baselinkFrame: "base_link"
   odometryFrame: "odom"
-  mapFrame: "map"
+  mapFrame: "odom"
 
   # GPS Settings
   useImuHeadingInitialization: false          # if using GPS data, set to "true"
