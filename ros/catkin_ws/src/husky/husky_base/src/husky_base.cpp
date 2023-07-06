@@ -29,27 +29,17 @@
 *
 */
 
-#include "husky_base/husky_diagnostics.h"
-#include "diagnostic_updater/diagnostic_updater.h"
 #include "ros/ros.h"
-#include "husky_msgs/HuskyStatus.h"
 #include "geometry_msgs/Twist.h"
+#include "husky_base/horizon_legacy_wrapper.h"
 
 double wheel_diameter;
 double max_accel;
 double max_speed;
 double polling_timeout;
 
-ros::Publisher diagnostic_publisher;
-husky_msgs::HuskyStatus husky_status_msg;
-diagnostic_updater::Updater diagnostics;
-
 void callback(const geometry_msgs::Twist::ConstPtr& msg)
 {
-  diagnostics.force_update();
-  husky_status_msg.header.stamp = ros::Time::now();
-  diagnostic_publisher.publish(husky_status_msg);
-
   double left = msg->linear.x + msg->linear.z;
   double right = msg->linear.x - msg->linear.z;
   double large = (left > right) ? left : right;
@@ -67,9 +57,6 @@ int main(int argc, char *argv[])
   ros::init(argc, argv, "husky_base");
   ros::NodeHandle nh, private_nh("~");
 
-  double control_frequency, diagnostic_frequency;
-  private_nh.param<double>("control_frequency", control_frequency, 10.0);
-  private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
   private_nh.param<double>("wheel_diameter", wheel_diameter, 0.3302);
   private_nh.param<double>("max_accel", max_accel, 5.0);
   private_nh.param<double>("max_speed", max_speed, 1.0);
@@ -80,23 +67,6 @@ int main(int argc, char *argv[])
 
   horizon_legacy::connect(port);
   horizon_legacy::configureLimits(max_speed, max_accel);
-  
-  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
-  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
-  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
-  husky_base::HuskySoftwareDiagnosticTask software_status_task(husky_status_msg, diagnostic_frequency);
-  
-  horizon_legacy::Channel<clearpath::DataPlatformInfo>::Ptr info =
-    horizon_legacy::Channel<clearpath::DataPlatformInfo>::requestData(polling_timeout);
-  std::ostringstream hardware_id_stream;
-  hardware_id_stream << "Husky " << info->getModel() << "-" << info->getSerial();
-
-  diagnostics.setHardwareID(hardware_id_stream.str());
-  diagnostics.add(system_status_task);
-  diagnostics.add(power_status_task);
-  diagnostics.add(safety_status_task);
-  diagnostics.add(software_status_task);
-  diagnostic_publisher = nh.advertise<husky_msgs::HuskyStatus>("status", 10);
 
   ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 1000, callback);
 
