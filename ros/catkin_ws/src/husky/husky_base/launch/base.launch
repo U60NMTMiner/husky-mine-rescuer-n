@@ -45,25 +45,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </rosparam>
     </node>
 
-    <!-- Differential controller parameters and basic localization -->
-    <include file="$(find husky_control)/launch/control.launch" />
-
-    <!--Teleop -->
-    <!--include file="$(find husky_control)/launch/teleop.launch" /-->
-
     <!-- Diagnostic Aggregator -->
     <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
         <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
     </node>
-
-    <!-- Lidar and IMU -->
-    <!-- include file="$(find vectornav)/launch/vectornav.launch" / -->
-
-    <include file="$(find ouster_ros)/launch/sensor.launch">
-        <arg name="sensor_hostname" value="$(arg sensor_hostname)" />
-        <arg name="viz" value="$(arg viz)" />
-        <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
-    </include>
 
     <include file="$(find lio_sam)/launch/run.launch" />
 </launch>

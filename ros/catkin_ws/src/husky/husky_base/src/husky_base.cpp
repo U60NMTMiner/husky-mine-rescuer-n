@@ -29,40 +29,37 @@
 *
 */
 
-#include "husky_base/husky_hardware.h"
-#include "controller_manager/controller_manager.h"
-#include "ros/callback_queue.h"
+#include "husky_base/husky_diagnostics.h"
+#include "diagnostic_updater/diagnostic_updater.h"
+#include "ros/ros.h"
+#include "husky_msgs/HuskyStatus.h"
+#include "geometry_msgs/Twist.h"
 
-#include <boost/chrono.hpp>
+double wheel_diameter;
+double max_accel;
+double max_speed;
+double polling_timeout;
 
-typedef boost::chrono::steady_clock time_source;
+ros::Publisher diagnostic_publisher;
+husky_msgs::HuskyStatus husky_status_msg;
+diagnostic_updater::Updater diagnostics;
 
-/**
-* Control loop for Husky, not realtime safe
-*/
-void controlLoop(husky_base::HuskyHardware &husky,
-                 controller_manager::ControllerManager &cm,
-                 time_source::time_point &last_time)
+void callback(const geometry_msgs::Twist::ConstPtr& msg)
 {
-  // Calculate monotonic time difference
-  time_source::time_point this_time = time_source::now();
-  boost::chrono::duration<double> elapsed_duration = this_time - last_time;
-  ros::Duration elapsed(elapsed_duration.count());
-  last_time = this_time;
+  diagnostics.force_update();
+  husky_status_msg.header.stamp = ros::Time::now();
+  diagnostic_publisher.publish(husky_status_msg);
 
-  // Process control loop
-  husky.reportLoopDuration(elapsed);
-  husky.updateJointsFromHardware();
-  cm.update(ros::Time::now(), elapsed);
-  husky.writeCommandsToHardware();
-}
+  double left = msg->linear.x + msg->linear.z;
+  double right = msg->linear.x - msg->linear.z;
+  double large = (left > right) ? left : right;
+  if ( large > max_speed )
+  {
+    left *= max_speed / large;
+    right *= max_speed / large;
+  }
 
-/**
-* Diagnostics loop for Husky, not realtime safe
-*/
-void diagnosticLoop(husky_base::HuskyHardware &husky)
-{
-  husky.updateDiagnostics();
+  horizon_legacy::controlSpeed(left, right, max_accel, max_accel);
 }
 
 int main(int argc, char *argv[])
@@ -73,34 +70,36 @@ int main(int argc, char *argv[])
   double control_frequency, diagnostic_frequency;
   private_nh.param<double>("control_frequency", control_frequency, 10.0);
   private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
+  private_nh.param<double>("wheel_diameter", wheel_diameter, 0.3302);
+  private_nh.param<double>("max_accel", max_accel, 5.0);
+  private_nh.param<double>("max_speed", max_speed, 1.0);
+  private_nh.param<double>("polling_timeout_", polling_timeout, 10.0);
 
-  // Initialize robot hardware and link to controller manager
-  husky_base::HuskyHardware husky(nh, private_nh, control_frequency);
-  controller_manager::ControllerManager cm(&husky, nh);
+  std::string port;
+  private_nh.param<std::string>("port", port, "/dev/prolific");
 
-  // Setup separate queue and single-threaded spinner to process timer callbacks
-  // that interface with Husky hardware - libhorizon_legacy not threadsafe. This
-  // avoids having to lock around hardware access, but precludes realtime safety
-  // in the control loop.
-  ros::CallbackQueue husky_queue;
-  ros::AsyncSpinner husky_spinner(1, &husky_queue);
+  horizon_legacy::connect(port);
+  horizon_legacy::configureLimits(max_speed, max_accel);
+  
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
+  husky_base::HuskySoftwareDiagnosticTask software_status_task(husky_status_msg, diagnostic_frequency);
+  
+  horizon_legacy::Channel<clearpath::DataPlatformInfo>::Ptr info =
+    horizon_legacy::Channel<clearpath::DataPlatformInfo>::requestData(polling_timeout);
+  std::ostringstream hardware_id_stream;
+  hardware_id_stream << "Husky " << info->getModel() << "-" << info->getSerial();
 
-  time_source::time_point last_time = time_source::now();
-  ros::TimerOptions control_timer(
-    ros::Duration(1 / control_frequency),
-    boost::bind(controlLoop, boost::ref(husky), boost::ref(cm), boost::ref(last_time)),
-    &husky_queue);
-  ros::Timer control_loop = nh.createTimer(control_timer);
+  diagnostics.setHardwareID(hardware_id_stream.str());
+  diagnostics.add(system_status_task);
+  diagnostics.add(power_status_task);
+  diagnostics.add(safety_status_task);
+  diagnostics.add(software_status_task);
+  diagnostic_publisher = nh.advertise<husky_msgs::HuskyStatus>("status", 10);
 
-  ros::TimerOptions diagnostic_timer(
-    ros::Duration(1 / diagnostic_frequency),
-    boost::bind(diagnosticLoop, boost::ref(husky)),
-    &husky_queue);
-  ros::Timer diagnostic_loop = nh.createTimer(diagnostic_timer);
+  ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 1000, callback);
 
-  husky_spinner.start();
-
-  // Process remainder of ROS callbacks separately, mainly ControlManager related
   ros::spin();
 
   return 0;
