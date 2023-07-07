@@ -40,14 +40,22 @@ double wheel_diameter;
 double max_accel;
 double max_speed;
 double polling_timeout;
+double control_frequency;
+double diagnostic_frequency;
+int diagnostic_loop;
+int loop_counter = 0;
 
 ros::Publisher diagnostic_publisher;
 husky_msgs::HuskyStatus husky_status_msg;
 //This thign creates a nodehandle so it has to be a pointer
 diagnostic_updater::Updater *diagnostics;
 
+ros::Rate *rate;
+
 void callback(const geometry_msgs::Twist::ConstPtr& msg)
 {
+  loop_counter++;
+  loop_counter %= diagnostic_loop;
   double left = msg->linear.x - msg->angular.z;
   double right = msg->linear.x + msg->angular.z;
   double large = (left > right) ? left : right;
@@ -59,25 +67,33 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg)
 
   horizon_legacy::controlSpeed(left, right, max_accel, max_accel);
 
-  diagnostics->force_update();
-  husky_status_msg.header.stamp = ros::Time::now();
-  diagnostic_publisher.publish(husky_status_msg);
+  if (loop_counter == 0) {
+    diagnostics->force_update();
+    husky_status_msg.header.stamp = ros::Time::now();
+    diagnostic_publisher.publish(husky_status_msg);
+  }
+  rate->sleep();
 }
 
 int main(int argc, char *argv[])
 {
   ros::init(argc, argv, "husky_base");
   ros::NodeHandle nh, private_nh("~");
+
+  private_nh.param<double>("control_frequency", control_frequency, 10.0);
+  private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
+  private_nh.param<double>("wheel_diameter", wheel_diameter, 0.3302);
+  private_nh.param<double>("max_accel", max_accel, 5.0);
+  private_nh.param<double>("max_speed", max_speed, 1.0);
+  private_nh.param<double>("polling_timeout_", polling_timeout, 10.0);
+  rate = new ros::Rate(control_frequency);
+  diagnostic_loop = control_frequency / diagnostic_frequency;
+  
   diagnostics = new diagnostic_updater::Updater();
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
   husky_base::HuskySoftwareDiagnosticTask software_status_task(husky_status_msg, 10);
-
-  private_nh.param<double>("wheel_diameter", wheel_diameter, 0.3302);
-  private_nh.param<double>("max_accel", max_accel, 5.0);
-  private_nh.param<double>("max_speed", max_speed, 1.0);
-  private_nh.param<double>("polling_timeout_", polling_timeout, 10.0);
 
   std::string port;
   private_nh.param<std::string>("port", port, "/dev/prolific");
@@ -101,6 +117,7 @@ int main(int argc, char *argv[])
 
   ros::spin();
   delete diagnostics;
+  delete rate;
 
   return 0;
 }
