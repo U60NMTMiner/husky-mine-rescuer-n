@@ -30,56 +30,60 @@
 */
 
 #include "ros/ros.h"
-#include "geometry_msgs/Twist.h"
 #include "husky_base/horizon_legacy_wrapper.h"
 #include "husky_base/husky_diagnostics.h"
 #include "diagnostic_updater/diagnostic_updater.h"
 #include "husky_msgs/HuskyStatus.h"
 
-double max_accel;
-double max_speed;
-double control_frequency;
-
-ros::Rate *rate;
-
-void callback(const geometry_msgs::Twist::ConstPtr& msg)
-{
-  double left = msg->linear.x - msg->angular.z;
-  double right = msg->linear.x + msg->angular.z;
-  double large = (left > right) ? left : right;
-  if ( large > max_speed )
-  {
-    left *= max_speed / large;
-    right *= max_speed / large;
-  }
-
-  horizon_legacy::controlSpeed(left, right, max_accel, max_accel);
-  rate->sleep();
-}
+double polling_timeout;
+double diagnostic_frequency;
 
 int main(int argc, char *argv[])
 {
   ros::init(argc, argv, "husky_base");
   ros::NodeHandle nh, private_nh("~");
 
-  private_nh.param<double>("control_frequency", control_frequency, 10.0);
-  private_nh.param<double>("max_accel", max_accel, 5.0);
-  private_nh.param<double>("max_speed", max_speed, 1.0);
+  private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
+  private_nh.param<double>("polling_timeout_", polling_timeout, 10.0);
 
-  rate = new ros::Rate(control_frequency);
-  
-  std::string port;
-  private_nh.param<std::string>("port", port, "/dev/ttyUSB0");
+  ros::Publisher diagnostic_publisher;
+  husky_msgs::HuskyStatus husky_status_msg;
+  diagnostic_updater::Updater diagnostics;
+  ros::Rate rate(diagnostic_frequency);
+
   if (!horizon_legacy::isConnected(port))
   {
     horizon_legacy::connect(port);
   }
-  horizon_legacy::configureLimits(max_speed, max_accel);
 
-  ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 5, callback);
+  diagnostics = new diagnostic_updater::Updater();
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
+  husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
+  husky_base::HuskySoftwareDiagnosticTask software_status_task(husky_status_msg, diagnostic_frequency);
 
-  ros::spin();
-  delete rate;
+  std::string port;
+  private_nh.param<std::string>("port", port, "/dev/ttyUSB0");
+
+  horizon_legacy::Channel<clearpath::DataPlatformInfo>::Ptr info =
+    horizon_legacy::Channel<clearpath::DataPlatformInfo>::requestData(polling_timeout);
+  std::ostringstream hardware_id_stream;
+  hardware_id_stream << "Husky " << info->getModel() << "-" << info->getSerial();
+
+  diagnostics->setHardwareID(hardware_id_stream.str());
+  diagnostics->add(system_status_task);
+  diagnostics->add(power_status_task);
+  diagnostics->add(safety_status_task);
+  diagnostics->add(software_status_task);
+  diagnostic_publisher = nh.advertise<husky_msgs::HuskyStatus>("status", 10);
+
+  while(ros::ok())
+  {
+    diagnostics->force_update();
+    husky_status_msg.header.stamp = ros::Time::now();
+    diagnostic_publisher.publish(husky_status_msg);
+    rate->sleep();
+  }
 
   return 0;
 }
