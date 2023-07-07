@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
   if (!horizon_legacy::isConnected(port))
   {
     horizon_legacy::connect(port);
-  }
+  } else { std::cout << "Already Connected\n"; }
 
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
