@@ -37,6 +37,7 @@
 
 double polling_timeout;
 double diagnostic_frequency;
+std::string port;
 
 int main(int argc, char *argv[])
 {
@@ -45,6 +46,8 @@ int main(int argc, char *argv[])
 
   private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
   private_nh.param<double>("polling_timeout_", polling_timeout, 10.0);
+  private_nh.param<std::string>("port", port, "/dev/ttyUSB0");
+
 
   ros::Publisher diagnostic_publisher;
   husky_msgs::HuskyStatus husky_status_msg;
@@ -56,33 +59,29 @@ int main(int argc, char *argv[])
     horizon_legacy::connect(port);
   }
 
-  diagnostics = new diagnostic_updater::Updater();
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
   husky_base::HuskySoftwareDiagnosticTask software_status_task(husky_status_msg, diagnostic_frequency);
-
-  std::string port;
-  private_nh.param<std::string>("port", port, "/dev/ttyUSB0");
 
   horizon_legacy::Channel<clearpath::DataPlatformInfo>::Ptr info =
     horizon_legacy::Channel<clearpath::DataPlatformInfo>::requestData(polling_timeout);
   std::ostringstream hardware_id_stream;
   hardware_id_stream << "Husky " << info->getModel() << "-" << info->getSerial();
 
-  diagnostics->setHardwareID(hardware_id_stream.str());
-  diagnostics->add(system_status_task);
-  diagnostics->add(power_status_task);
-  diagnostics->add(safety_status_task);
-  diagnostics->add(software_status_task);
+  diagnostics.setHardwareID(hardware_id_stream.str());
+  diagnostics.add(system_status_task);
+  diagnostics.add(power_status_task);
+  diagnostics.add(safety_status_task);
+  diagnostics.add(software_status_task);
   diagnostic_publisher = nh.advertise<husky_msgs::HuskyStatus>("status", 10);
 
   while(ros::ok())
   {
-    diagnostics->force_update();
+    diagnostics.force_update();
     husky_status_msg.header.stamp = ros::Time::now();
     diagnostic_publisher.publish(husky_status_msg);
-    rate->sleep();
+    rate.sleep();
   }
 
   return 0;

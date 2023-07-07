@@ -30,10 +30,14 @@ add_library(horizon_legacy
 
 add_executable(husky_node
   src/husky_base.cpp
-  src/husky_hardware.cpp
-  src/husky_diagnostics.cpp
   src/horizon_legacy_wrapper.cpp)
 target_link_libraries(husky_node horizon_legacy ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+
+add_executable(husky_diagnostics
+  src/diagnostics.cpp
+  src/husky_diagnostics.cpp
+  src/horizon_legacy_wrapper.cpp)
+target_link_libraries(husky_diagnostics horizon_legacy ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 
 roslint_cpp(
   src/husky_base.cpp
