@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
   if (!horizon_legacy::isConnected(port))
   {
     horizon_legacy::connect(port);
-  } else { std::cout << "Already Connected\n"; }
+  } else { ROS_INFO("Already Connected"); }
   horizon_legacy::configureLimits(max_speed, max_accel);
 
   ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 5, callback);
