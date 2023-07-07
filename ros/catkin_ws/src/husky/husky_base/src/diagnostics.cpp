@@ -57,6 +57,7 @@ int main(int argc, char *argv[])
   if (!horizon_legacy::isConnected(port))
   {
     horizon_legacy::connect(port);
+    ROS_DEBUG("New Connection");
   } else { ROS_INFO("Already Connected"); }
 
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);

@@ -30,6 +30,7 @@
 */
 
 #include "ros/ros.h"
+#include <ros/console.h>
 #include "geometry_msgs/Twist.h"
 #include "husky_base/horizon_legacy_wrapper.h"
 #include "husky_base/husky_diagnostics.h"
@@ -62,6 +63,10 @@ int main(int argc, char *argv[])
   ros::init(argc, argv, "husky_node");
   ros::NodeHandle nh, private_nh("~");
 
+  if( ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug) ) {
+    ros::console::notifyLoggerLevelsChanged();
+  }
+
   private_nh.param<double>("control_frequency", control_frequency, 10.0);
   private_nh.param<double>("max_accel", max_accel, 5.0);
   private_nh.param<double>("max_speed", max_speed, 1.0);
@@ -73,6 +78,7 @@ int main(int argc, char *argv[])
   if (!horizon_legacy::isConnected(port))
   {
     horizon_legacy::connect(port);
+    ROS_DEBUG("New Connection");
   } else { ROS_INFO("Already Connected"); }
   horizon_legacy::configureLimits(max_speed, max_accel);
 
