@@ -43,7 +43,8 @@ double polling_timeout;
 
 ros::Publisher diagnostic_publisher;
 husky_msgs::HuskyStatus husky_status_msg;
-diagnostic_updater::Updater diagnostics;
+//This thign creates a nodehandle so it has to be a pointer
+diagnostic_updater::Updater *diagnostics;
 
 void callback(const geometry_msgs::Twist::ConstPtr& msg)
 {
@@ -58,7 +59,7 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg)
 
   horizon_legacy::controlSpeed(left, right, max_accel, max_accel);
 
-  diagnostics.force_update();
+  diagnostics->force_update();
   husky_status_msg.header.stamp = ros::Time::now();
   diagnostic_publisher.publish(husky_status_msg);
 }
@@ -67,6 +68,7 @@ int main(int argc, char *argv[])
 {
   ros::init(argc, argv, "husky_base");
   ros::NodeHandle nh, private_nh("~");
+  diagnostics = new diagnostic_updater::Updater();
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSystemStatus> system_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataPowerSystem> power_status_task(husky_status_msg);
   husky_base::HuskyHardwareDiagnosticTask<clearpath::DataSafetySystemStatus> safety_status_task(husky_status_msg);
@@ -88,16 +90,17 @@ int main(int argc, char *argv[])
   std::ostringstream hardware_id_stream;
   hardware_id_stream << "Husky " << info->getModel() << "-" << info->getSerial();
 
-  diagnostics.setHardwareID(hardware_id_stream.str());
-  diagnostics.add(system_status_task);
-  diagnostics.add(power_status_task);
-  diagnostics.add(safety_status_task);
-  diagnostics.add(software_status_task);
+  diagnostics->setHardwareID(hardware_id_stream.str());
+  diagnostics->add(system_status_task);
+  diagnostics->add(power_status_task);
+  diagnostics->add(safety_status_task);
+  diagnostics->add(software_status_task);
   diagnostic_publisher = nh.advertise<husky_msgs::HuskyStatus>("status", 10);
 
   ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 1000, callback);
 
   ros::spin();
+  delete diagnostics;
 
   return 0;
 }
