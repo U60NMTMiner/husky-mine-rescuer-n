@@ -36,11 +36,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             port: $(arg port)
 
             control_frequency: 10.0
-            diagnostic_frequency: 1.0
 
             max_acceleration: 1.0
             max_speed: 1.0
             wheel_diameter: 0.3302
+        </rosparam>
+    </node>
+
+    <node pkg="husky_base" type="husky_diagnostics" name="husky_diagnostics">
+        <rosparam subst_value='true'>
+            port: $(arg port)
+            diagnostic_frequency: 1.0
             polling_timeout: 10.0
         </rosparam>
     </node>
@@ -50,5 +56,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
     </node>
 
-    <include file="$(find lio_sam)/launch/run.launch" />
+    <!--include file="$(find lio_sam)/launch/run.launch" /-->
 </launch>
