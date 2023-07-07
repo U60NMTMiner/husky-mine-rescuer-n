@@ -59,7 +59,7 @@ void callback(const geometry_msgs::Twist::ConstPtr& msg)
 
 int main(int argc, char *argv[])
 {
-  ros::init(argc, argv, "husky_base");
+  ros::init(argc, argv, "husky_node");
   ros::NodeHandle nh, private_nh("~");
 
   private_nh.param<double>("control_frequency", control_frequency, 10.0);

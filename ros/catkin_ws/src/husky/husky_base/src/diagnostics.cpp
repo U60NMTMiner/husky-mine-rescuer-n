@@ -41,7 +41,7 @@ std::string port;
 
 int main(int argc, char *argv[])
 {
-  ros::init(argc, argv, "husky_base");
+  ros::init(argc, argv, "husky_diagnostics");
   ros::NodeHandle nh, private_nh("~");
 
   private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
