@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
 <launch>
-	<arg name="target_frame" default="base_link"/>
+	<arg name="target_frame" default="odom"/>
 	<arg name="frame_id" default="imu_link"/>
 
 	<include file="$(find vectornav)/launch/vectornav.launch">

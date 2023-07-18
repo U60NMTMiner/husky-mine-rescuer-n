@@ -21,7 +21,7 @@ if [ "$(hostname)" = "husky" ]; then
   export HUSKY_PORT=/dev/$HUSKY_PORT
   export IMU_PORT=/dev/$IMU_PORT
 else
-  export ROS_MASTER_URI=http://husky:11311
+  # export ROS_MASTER_URI=http://husky:11311
   alias start_joy="roslaunch husky_control teleop.launch"
 fi
 
