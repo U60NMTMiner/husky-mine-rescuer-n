@@ -5,6 +5,16 @@
     <!-- Parameters -->
     <rosparam file="$(find lio_sam)/config/params.yaml" command="load" />
 
+    <!-- Vectornav IMU -->
+    <include file="$(find vectornav)/launch/vectornav.launch" />
+
+    <!-- Ouster Lidar -->
+    <include file="$(find ouster_ros)/launch/sensor.launch">
+        <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
+        <arg name="sensor_hostname" value="ouster" />
+        <arg name="viz" value="false" />
+    </include>
+
     <!--- LOAM -->
     <include file="$(find lio_sam)/launch/include/module_loam.launch" />
 
