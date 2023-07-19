@@ -12,6 +12,7 @@
     <include file="$(find ouster_ros)/launch/sensor.launch">
         <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
         <arg name="sensor_hostname" value="ouster" />
+        <arg name="lidar_mode" value="512x10" />
         <arg name="viz" value="false" />
     </include>
 
