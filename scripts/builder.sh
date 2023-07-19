@@ -30,4 +30,4 @@ cmake_args=(
   -DCMAKE_WARN_DEPRECATED=OFF
 )
 
-alias cake="catkin_make --cmake-args ${cmake_args[@]}"
+alias cake="catkin build --cmake-args ${cmake_args[@]}"
