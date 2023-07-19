@@ -6,7 +6,7 @@
     <rosparam file="$(find lio_sam)/config/params.yaml" command="load" />
 
     <!-- Vectornav IMU -->
-    <include file="$(find vectornav)/launch/vectornav.launch" />
+    <!-- include file="$(find vectornav)/launch/vectornav.launch" /-->
 
     <!-- Ouster Lidar -->
     <include file="$(find ouster_ros)/launch/sensor.launch">
