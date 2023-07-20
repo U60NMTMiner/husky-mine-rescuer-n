@@ -4,3 +4,4 @@ ros/catkin_ws/logs/
 ros/catkin_ws/.catkin_tools/
 ros/catkin_ws/.catkin_workspace
 bag/
+.ros/

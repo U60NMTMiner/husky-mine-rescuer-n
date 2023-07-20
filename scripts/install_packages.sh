@@ -3,53 +3,59 @@
 set -eou pipefail
 export DEBIAN_FRONTEND='noninteractive'
 
-add-apt-repository -y ppa:borglab/gtsam-release-4.0
+sudo add-apt-repository -y ppa:borglab/gtsam-release-4.0
 sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
-apt-get install curl
+sudo apt-get install curl
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
-apt-get update -y
-apt-get upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
 
-apt-get install -y ros-noetic-ros-base
-apt-get install -y ros-noetic-rosconsole
-apt-get install -y ros-noetic-roscpp
+packages=(
+    ros-noetic-ros-base
+    ros-noetic-rosconsole
+    ros-noetic-roscpp
 
-apt-get install -y ros-noetic-urdf
-apt-get install -y ros-noetic-xacro
-apt-get install -y ros-noetic-joy
-apt-get install -y ros-noetic-controller-manager
-apt-get install -y ros-noetic-teleop-twist-joy
-apt-get install -y ros-noetic-teleop-twist-keyboard
-apt-get install -y ros-noetic-twist-mux
-apt-get install -y ros-noetic-roslint
-apt-get install -y ros-noetic-rviz
-apt-get install -y ros-noetic-pcl-ros
-apt-get install -y ros-noetic-navigation
-apt-get install -y ros-noetic-robot-localization
-apt-get install -y ros-noetic-robot-state-publisher
-apt-get install -y ros-noetic-cv-bridge
-apt-get install -y ros-noetic-tf2-tools
-apt-get install -y ros-noetic-imu-transformer
-apt-get install -y ros-noetic-imu-filter-madgwick
+    ros-noetic-urdf
+    ros-noetic-xacro
+    ros-noetic-joy
+    ros-noetic-controller-manager
+    ros-noetic-teleop-twist-joy
+    ros-noetic-teleop-twist-keyboard
+    ros-noetic-twist-mux
+    ros-noetic-roslint
+    ros-noetic-rviz
+    ros-noetic-pcl-ros
+    ros-noetic-navigation
+    ros-noetic-robot-localization
+    ros-noetic-robot-state-publisher
+    ros-noetic-cv-bridge
+    ros-noetic-tf2-tools
+    ros-noetic-imu-transformer
+    ros-noetic-imu-filter-madgwick
 
-apt-get install -y python3-scipy
-apt-get install -y libcurl4-openssl-dev
-apt-get install -y libspdlog-dev
-apt-get install -y libjsoncpp-dev
-apt-get install -y libpcl-dev
-apt-get install -y libpcap0.8-dev
-apt-get install -y libgtsam-dev 
-apt-get install -y libgtsam-unstable-dev
-apt-get install -y libcv-bridge-dev
-apt-get install -y python3-wstool
-apt-get install -y python3-rosdep
-apt-get install -y ninja-build
-apt-get install -y stow
+    python3-scipy
+    libcurl4-openssl-dev
+    libspdlog-dev
+    libjsoncpp-dev
+    libpcl-dev
+    libpcap0.8-dev
+    libgtsam-dev 
+    libgtsam-unstable-dev
+    libcv-bridge-dev
+    python3-wstool
+    python3-rosdep
+    ninja-build
+    stow
+)
 
-rosdep init
+sudo apt-get install -y ${packages[@]}
+
+
+sudo rosdep init || true
 rosdep update
 rosdep install --from-paths ../ros/catkin_ws/src --ignore-src --rosdistro=noetic -y
 
-apt-get remove ros-noetic-abseil-cpp
-/bin/bash ../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh
+sudo apt-get remove ros-noetic-abseil-cpp || true
+/bin/bash ../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh || true
+rm -rf abseil-cpp
