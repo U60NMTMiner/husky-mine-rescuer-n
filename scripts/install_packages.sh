@@ -44,3 +44,10 @@ apt-get install -y python3-wstool
 apt-get install -y python3-rosdep
 apt-get install -y ninja-build
 apt-get install -y stow
+
+rosdep init
+rosdep update
+rosdep install --from-paths ../ros/catkin_ws/src --ignore-src --rosdistro=noetic -y
+
+apt-get remove ros-noetic-abseil-cpp
+/bin/bash ../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh
