@@ -11,7 +11,9 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo ap
 apt-get update -y
 apt-get upgrade -y
 
-apt-get install -y ros-noetic-desktop-base
+apt-get install -y ros-noetic-ros-base
+apt-get install -y ros-noetic-rosconsole
+apt-get install -y ros-noetic-roscpp
 
 apt-get install -y ros-noetic-urdf
 apt-get install -y ros-noetic-xacro
