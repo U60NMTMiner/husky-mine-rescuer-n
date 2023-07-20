@@ -23,6 +23,8 @@ apt-get install -y ros-noetic-robot-localization
 apt-get install -y ros-noetic-robot-state-publisher
 apt-get install -y ros-noetic-cv-bridge
 apt-get install -y ros-noetic-tf2-tools
+apt-get install -y ros-noetic-imu-transformer
+apt-get install -y ros-noetic-imu-filter-madgwick
 
 apt-get install -y python3-scipy
 apt-get install -y libcurl4-openssl-dev
@@ -33,3 +35,7 @@ apt-get install -y libpcap0.8-dev
 apt-get install -y libgtsam-dev 
 apt-get install -y libgtsam-unstable-dev
 apt-get install -y libcv-bridge-dev
+apt-get install -y python3-wstool
+apt-get install -y python3-rosdep
+apt-get install -y ninja-build
+apt-get install -y stow
