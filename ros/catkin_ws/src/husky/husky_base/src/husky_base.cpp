@@ -29,63 +29,79 @@
 *
 */
 
-#include "ros/ros.h"
-#include <ros/console.h>
-#include "geometry_msgs/Twist.h"
-#include "husky_base/horizon_legacy_wrapper.h"
-#include "husky_base/husky_diagnostics.h"
-#include "diagnostic_updater/diagnostic_updater.h"
-#include "husky_msgs/HuskyStatus.h"
+#include "husky_base/husky_hardware.h"
+#include "controller_manager/controller_manager.h"
+#include "ros/callback_queue.h"
 
-double max_accel;
-double max_speed;
-double control_frequency;
+#include <boost/chrono.hpp>
 
-ros::Rate *rate;
+typedef boost::chrono::steady_clock time_source;
 
-void callback(const geometry_msgs::Twist::ConstPtr& msg)
+/**
+* Control loop for Husky, not realtime safe
+*/
+void controlLoop(husky_base::HuskyHardware &husky,
+                 controller_manager::ControllerManager &cm,
+                 time_source::time_point &last_time)
 {
-  double left = msg->linear.x - msg->angular.z;
-  double right = msg->linear.x + msg->angular.z;
-  double large = (left > right) ? left : right;
-  if ( large > max_speed )
-  {
-    left *= max_speed / large;
-    right *= max_speed / large;
-  }
+  // Calculate monotonic time difference
+  time_source::time_point this_time = time_source::now();
+  boost::chrono::duration<double> elapsed_duration = this_time - last_time;
+  ros::Duration elapsed(elapsed_duration.count());
+  last_time = this_time;
 
-  horizon_legacy::controlSpeed(left, right, max_accel, max_accel);
-  rate->sleep();
+  // Process control loop
+  husky.reportLoopDuration(elapsed);
+  husky.updateJointsFromHardware();
+  cm.update(ros::Time::now(), elapsed);
+  husky.writeCommandsToHardware();
+}
+
+/**
+* Diagnostics loop for Husky, not realtime safe
+*/
+void diagnosticLoop(husky_base::HuskyHardware &husky)
+{
+  husky.updateDiagnostics();
 }
 
 int main(int argc, char *argv[])
 {
-  ros::init(argc, argv, "husky_node");
+  ros::init(argc, argv, "husky_base");
   ros::NodeHandle nh, private_nh("~");
 
-  if( ros::console::set_logger_level(ROSCONSOLE_DEFAULT_NAME, ros::console::levels::Debug) ) {
-    ros::console::notifyLoggerLevelsChanged();
-  }
-
+  double control_frequency, diagnostic_frequency;
   private_nh.param<double>("control_frequency", control_frequency, 10.0);
-  private_nh.param<double>("max_accel", max_accel, 5.0);
-  private_nh.param<double>("max_speed", max_speed, 1.0);
+  private_nh.param<double>("diagnostic_frequency", diagnostic_frequency, 1.0);
 
-  rate = new ros::Rate(control_frequency);
-  
-  std::string port;
-  private_nh.param<std::string>("port", port, "/dev/ttyUSB0");
-  if (!horizon_legacy::isConnected(port))
-  {
-    horizon_legacy::connect(port);
-    ROS_DEBUG("New Connection");
-  } else { ROS_INFO("Already Connected"); }
-  horizon_legacy::configureLimits(max_speed, max_accel);
+  // Initialize robot hardware and link to controller manager
+  husky_base::HuskyHardware husky(nh, private_nh, control_frequency);
+  controller_manager::ControllerManager cm(&husky, nh);
 
-  ros::Subscriber sub = nh.subscribe("joy_teleop/cmd_vel", 5, callback);
+  // Setup separate queue and single-threaded spinner to process timer callbacks
+  // that interface with Husky hardware - libhorizon_legacy not threadsafe. This
+  // avoids having to lock around hardware access, but precludes realtime safety
+  // in the control loop.
+  ros::CallbackQueue husky_queue;
+  ros::AsyncSpinner husky_spinner(1, &husky_queue);
 
+  time_source::time_point last_time = time_source::now();
+  ros::TimerOptions control_timer(
+    ros::Duration(1 / control_frequency),
+    boost::bind(controlLoop, boost::ref(husky), boost::ref(cm), boost::ref(last_time)),
+    &husky_queue);
+  ros::Timer control_loop = nh.createTimer(control_timer);
+
+  ros::TimerOptions diagnostic_timer(
+    ros::Duration(1 / diagnostic_frequency),
+    boost::bind(diagnosticLoop, boost::ref(husky)),
+    &husky_queue);
+  ros::Timer diagnostic_loop = nh.createTimer(diagnostic_timer);
+
+  husky_spinner.start();
+
+  // Process remainder of ROS callbacks separately, mainly ControlManager related
   ros::spin();
-  delete rate;
 
   return 0;
 }

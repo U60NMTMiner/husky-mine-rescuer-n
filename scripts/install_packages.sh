@@ -35,6 +35,10 @@ packages=(
     ros-noetic-imu-filter-madgwick
 
     python3-scipy
+    python3-wstool
+    python3-rosdep
+    python3-catkin-tools
+
     libcurl4-openssl-dev
     libspdlog-dev
     libjsoncpp-dev
@@ -43,8 +47,6 @@ packages=(
     libgtsam-dev 
     libgtsam-unstable-dev
     libcv-bridge-dev
-    python3-wstool
-    python3-rosdep
     ninja-build
     stow
 )
