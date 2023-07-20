@@ -57,11 +57,6 @@ namespace horizon_legacy
     reconnect();
   }
 
-  bool isConnected(std::string port)
-  {
-    return clearpath::Transport::instance().isConfigured();
-  }
-
   void configureLimits(double max_speed, double max_accel)
   {
 

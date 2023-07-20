@@ -45,8 +45,6 @@ namespace horizon_legacy
 
   void connect(std::string port);
 
-  bool isConnected(std::string port);
-
   void reconnect();
 
   void configureLimits(double max_speed, double max_accel);
