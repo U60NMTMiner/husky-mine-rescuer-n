@@ -32,6 +32,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
 
+    <remap from="ouster/points" to="points2" />
+    <remap from="vectornav/IMU" to="imu" />
+    <remap from="husky_velocity_controller/odom" to="odom" />
+
     <!-- Husky harware driver -->
     <node pkg="husky_base" type="husky_node" name="husky_node">
         <rosparam subst_value="true">
@@ -66,18 +70,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         </include>
     </group>
 
-    <group if="$(arg imu)">
-        <machine
-            name="pi"
-            address="$(arg pi_addr)"
-            user="pi"
-            password="123456789"
-            env-loader="/home/pi/husky/scripts/env_pi.sh"
-            default="true"
-        />
-        <include file="$(find vectornav)/launch/vectornav.launch" />
-    </group>
-
     <group if="$(arg map)">
         <node name="cartographer_node" pkg="cartographer_ros"
             type="cartographer_node" args="
@@ -90,4 +82,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
     </group>
 
+    <!--
+    THIS GROUP MUST BE LAST
+    Everything after it will run on the pi
+    -->
+    <group if="$(arg imu)">
+        <machine
+            name="pi"
+            address="$(arg pi_addr)"
+            user="pi"
+            password="123456789"
+            env-loader="/home/pi/husky/scripts/env_pi.sh"
+            default="true"
+        />
+        <include file="$(find vectornav)/launch/vectornav.launch" />
+    </group>
 </launch>
