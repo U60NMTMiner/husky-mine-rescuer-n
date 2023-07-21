@@ -15,6 +15,10 @@
 -->
 
 <launch>
+  <remap from="ouster/points" to="points2" />
+  <remap from="vectornav/IMU" to="imu" />
+  <remap from="husky_velocity_controller/odom" to="odom" />
+
   <param name="robot_description" textfile="$(find xacro)/xacro '$(find husky_description)/urdf/husky.urdf.xacro'" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher"
@@ -25,13 +29,8 @@
           -configuration_directory $(find cartographer_ros)/configuration_files
           -configuration_basename husky.lua"
       output="screen">
-    <remap from="ouster/points" to="points2" />
-    <remap from="vectornav/IMU" to="imu" />
   </node>
 
   <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
       type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
-
-  <node name="rviz" pkg="rviz" type="rviz" required="true"
-      args="-d $(find cartographer_ros)/configuration_files/demo_3d.rviz" />
 </launch>
