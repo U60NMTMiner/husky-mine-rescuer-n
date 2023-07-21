@@ -68,6 +68,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
             <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
+            <arg name="ouster_ns" value="" />
         </include>
     </group>
 
