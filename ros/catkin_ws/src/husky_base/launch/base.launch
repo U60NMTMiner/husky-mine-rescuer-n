@@ -63,12 +63,12 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </node>
 
     <group if="$(arg cam)">
+	    <remap from="/ouster/points" to="/points2" />
         <include file="$(find ouster_ros)/launch/sensor.launch">
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
             <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
         </include>
-        <remap from="ouster/points" to="points2" />
     </group>
 
     <group if="$(arg map)">
