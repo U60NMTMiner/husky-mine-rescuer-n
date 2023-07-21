@@ -34,7 +34,7 @@
   <node name="rviz" pkg="rviz" type="rviz" required="true"
       args="-d $(find cartographer_ros)/configuration_files/demo_3d.rviz" />
   <remap from="ouster/points" to="points2" />
-  <remap from="imu_correct" to="imu" />
+  <remap from="vectornav/IMU" to="imu" />
   <remap from="husky_velocity_controller/odom" to="odom" />
   <node name="playbag" pkg="rosbag" type="play"
       args="--clock $(arg bag_filename)" />

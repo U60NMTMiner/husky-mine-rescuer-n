@@ -27,6 +27,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 <launch>
     <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" />
+    <arg name="pi_addr" default="$(optenv PI_ADDRESS 10.0.0.5)" />
     <arg name="camera" default="false" />
 
     <!-- Husky harware driver -->
@@ -57,20 +58,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
     <group if="$(arg camera)">
         <include file="$(find ouster_ros)/launch/sensor.launch">
-            <rosparam subst_value="true">
-                sensor_hostname: ouster
-                lidar_mode: 512x20
-                timestamp_mode: TIME_FROM_PTP_1588
-            </rosparam>
+            <arg name="sensor_hostname" value="ouster" />
+            <arg name="lidar_mode" value="512x20" />
+            <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
         </include>
         <machine
             name="pi"
-            address="pi"
+            address="$(arg pi_addr)"
             user="pi"
+            password="123456789"
             env-loader="/home/pi/husky/scripts/env_pi.sh"
             default="true"
         />
-        <include machine="pi" file="$(find vectornav)/launch/vectornav.launch" />
+        <include file="$(find vectornav)/launch/vectornav.launch" />
     </group>
 
 </launch>

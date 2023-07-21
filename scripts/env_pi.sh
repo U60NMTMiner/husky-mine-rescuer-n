@@ -1,14 +1,14 @@
 #!/bin/bash
 
-path=$(dirname "$0")
-cd $path
+_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${_dir}/builder.sh
 
-source builder.sh
-
-IMU_PORT=$(ls /dev/serial/by-id | grep FTDI)
-IMU_PORT=$(readlink /dev/serial/by-id/$IMU_PORT)
-IMU_PORT="/dev$(basename $IMU_PORT)"
-export IMU_PORT=$IMU_PORT
+port=$(get_usb "FTDI")
+if [[ $? -eq 0 ]]; then
+    export IMU_PORT=$port
+else
+    unset IMU_PORT
+fi
 
 source /opt/ros/noetic/setup.bash
 source /home/pi/husky/ros/catkin_ws/devel/setup.bash
