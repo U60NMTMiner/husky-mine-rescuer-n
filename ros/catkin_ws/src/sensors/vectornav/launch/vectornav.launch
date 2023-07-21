@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-	<!--remap from="/vectornav/IMU" to="/imu/data"/-->
-	<arg name="frame_id" default="imu_link"/>
+	<arg name="frame_id" default="base_link"/>
 	<arg name="serial_port" default="$(optenv IMU_PORT /dev/ttyUSB0)"/>
 
 	<node pkg="vectornav" type="vnpub" name="vectornav" output="screen" >
