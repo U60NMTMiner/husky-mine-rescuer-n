@@ -19,7 +19,7 @@
   <remap from="vectornav/IMU" to="imu" />
   <remap from="husky_velocity_controller/odom" to="odom" />
 
-  <param name="robot_description" textfile="$(find xacro)/xacro '$(find husky_description)/urdf/husky.urdf.xacro'" />
+  <param name="robot_description" textfile="$(find husky_description)/urdf/husky.urdf" />
 
   <node name="robot_state_publisher" pkg="robot_state_publisher"
     type="robot_state_publisher" />
