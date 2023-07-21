@@ -1,5 +1,8 @@
 #!/bin/bash
 
+path=$(dirname "$0")
+cd $path
+
 source builder.sh
 
 IMU_PORT=$(ls /dev/serial/by-id | grep FTDI)

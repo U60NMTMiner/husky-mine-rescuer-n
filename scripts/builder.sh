@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Always run in catkin_ws
-# parent_path=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
-# cd "$parent_path/../ros/catkin_ws"
+path=$(dirname "$0")
+cd $path
 
 # Get active IP address
 ip_addr=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
