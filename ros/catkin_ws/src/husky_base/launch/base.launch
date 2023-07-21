@@ -28,7 +28,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <launch>
     <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" />
     <arg name="pi_addr" default="$(optenv PI_ADDRESS 10.0.0.5)" />
-    <arg name="camera" default="false" />
+    <arg name="cam" default="false" />
+    <arg name="imu" default="false" />
+    <arg name="map" default="false" />
 
     <!-- Husky harware driver -->
     <node pkg="husky_base" type="husky_node" name="husky_node">
@@ -56,12 +58,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
     </node>
 
-    <group if="$(arg camera)">
+    <group if="$(arg cam)">
         <include file="$(find ouster_ros)/launch/sensor.launch">
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
             <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
         </include>
+    </group>
+
+    <group if="$(arg imu)">
         <machine
             name="pi"
             address="$(arg pi_addr)"
@@ -71,6 +76,18 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             default="true"
         />
         <include file="$(find vectornav)/launch/vectornav.launch" />
+    </group>
+
+    <group if="$(arg map)">
+        <node name="cartographer_node" pkg="cartographer_ros"
+            type="cartographer_node" args="
+            -configuration_directory $(find cartographer_ros)/configuration_files
+            -configuration_basename husky.lua"
+            output="screen">
+        </node>
+
+        <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+            type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
     </group>
 
 </launch>
