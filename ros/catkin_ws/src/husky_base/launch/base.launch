@@ -68,6 +68,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             <arg name="lidar_mode" value="512x20" />
             <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
         </include>
+        <remap from="ouster/points" to="points2" />
     </group>
 
     <group if="$(arg map)">
