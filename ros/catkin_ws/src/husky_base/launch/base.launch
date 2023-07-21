@@ -32,8 +32,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
 
-    <remap from="ouster/points" to="points2" />
-    <remap from="vectornav/IMU" to="imu" />
     <remap from="husky_velocity_controller/odom" to="odom" />
 
     <!-- Husky harware driver -->
@@ -65,6 +63,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     </node>
 
     <group if="$(arg cam)">
+        <remap from="ouster/points" to="points2" />
         <include file="$(find ouster_ros)/launch/sensor.launch">
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
@@ -89,6 +88,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     Everything after it will run on the pi
     -->
     <group if="$(arg imu)">
+        <remap from="vectornav/IMU" to="imu" />
         <machine
             name="pi"
             address="$(arg pi_addr)"
