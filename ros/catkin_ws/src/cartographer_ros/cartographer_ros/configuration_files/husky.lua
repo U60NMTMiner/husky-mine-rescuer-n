@@ -20,12 +20,12 @@ options = {
   trajectory_builder = TRAJECTORY_BUILDER,
   map_frame = "map",
   tracking_frame = "base_link",
-  published_frame = "base_link",
-  odom_frame = "odom",
+  published_frame = "map",
+  odom_frame = "map",
   provide_odom_frame = true,
   publish_frame_projected_to_2d = false,
   use_pose_extrapolator = true,
-  use_odometry = false,
+  use_odometry = true,
   use_nav_sat = false,
   use_landmarks = false,
   num_laser_scans = 0,
@@ -43,7 +43,7 @@ options = {
   landmarks_sampling_ratio = 1.,
 }
 
-TRAJECTORY_BUILDER_3D.num_accumulated_range_data = 160
+TRAJECTORY_BUILDER_3D.num_accumulated_range_data = 1
 TRAJECTORY_BUILDER.pure_localization_trimmer = {
   max_submaps_to_keep = 3,
 }

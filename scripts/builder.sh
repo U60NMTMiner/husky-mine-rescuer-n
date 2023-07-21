@@ -20,9 +20,11 @@ if [ "$(hostname)" = "husky" ]; then
   IMU_PORT=$(basename "$(readlink "/dev/serial/by-id/$(ls /dev/serial/by-id | grep FTDI)")")
   export HUSKY_PORT=/dev/$HUSKY_PORT
   export IMU_PORT=/dev/$IMU_PORT
-else
+elif [ "$(hostname)" = "ros" ]; then
   export ROS_MASTER_URI=http://husky:11311
   alias start_joy="roslaunch husky_control teleop.launch"
+elif [ "$(hostname)" = "raspberrypi"]; then
+  export ROS_MASTER_URI=http://husky:11311
 fi
 
 cmake_args=(
