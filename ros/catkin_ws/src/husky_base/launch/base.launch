@@ -68,7 +68,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <include file="$(find ouster_ros)/launch/sensor.launch">
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
-            <arg name="timestamp_mode" value="TIME_FROM_PTP_1588" />
+            <arg name="timestamp_mode" value="TIME_FROM_ROS_TIME" />
         </include>
     </group>
 
@@ -89,7 +89,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     Everything after it will run on the pi
     -->
     <group if="$(arg imu)">
-        <remap from="vectornav/IMU" to="imu" />
+        <remap from="vectornav/IMU" to="imu/data_raw" />
+        <remap from="vectornav/Mag" to="imu/mag" />
+        <remap from="imu/data" to="imu" />
         <machine
             name="pi"
             address="$(arg pi_addr)"
@@ -99,5 +101,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             default="true"
         />
         <include file="$(find vectornav)/launch/vectornav.launch" />
+        <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter">
+            <rosparam>
+                publish_tf: false
+            </rosparam>
+        </node>
     </group>
 </launch>
