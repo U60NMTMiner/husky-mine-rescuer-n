@@ -33,6 +33,7 @@ packages=(
     ros-noetic-tf2-tools
     ros-noetic-imu-transformer
     ros-noetic-imu-filter-madgwick
+    ros-noetic-velodyne
 
     python3-scipy
     python3-wstool

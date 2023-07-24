@@ -28,7 +28,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <launch>
     <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" />
     <arg name="pi_addr" default="$(optenv PI_ADDRESS 10.0.0.5)" />
-    <arg name="cam" default="false" />
+    <arg name="ouster" default="false" />
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
 
@@ -62,13 +62,19 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
     </node>
 
-    <group if="$(arg cam)">
+    <group if="$(arg ouster)">
 	    <remap from="/ouster/points" to="/points2" />
 	    <remap from="/ouster/imu" to="/imu" />
         <include file="$(find ouster_ros)/launch/sensor.launch">
             <arg name="sensor_hostname" value="ouster" />
             <arg name="lidar_mode" value="512x20" />
             <arg name="timestamp_mode" value="TIME_FROM_ROS_TIME" />
+        </include>
+    </group>
+
+    <group if="$(arg velodyne)">
+        <remap from="/velodyne_points" to="/points2" />
+        <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch">
         </include>
     </group>
 
