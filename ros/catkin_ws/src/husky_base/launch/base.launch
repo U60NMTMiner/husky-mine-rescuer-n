@@ -29,6 +29,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" />
     <arg name="pi_addr" default="$(optenv PI_ADDRESS 10.0.0.5)" />
     <arg name="ouster" default="false" />
+    <arg name="velodyne" default="false" />
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
 
