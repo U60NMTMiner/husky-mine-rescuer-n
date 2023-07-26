@@ -17,7 +17,8 @@ Cd into the folder
 ```cd husky-mine-rescuer```  
 Run the install script  
 ```./scripts/install_packages.sh```  
-Add the husky to your /etc/hosts, where {husky-ip} is the ip address of the husky. This is currently sent as a discord message on wifi startup.  
+Add the husky to your /etc/hosts, where {husky-ip} is the ip address of the husky. This is currently sent as a discord message on wifi startup.
+The ip address will change occasionally. Instead of running the following command, simply edit the /etc/hosts file to include the new ip. 
 ```sudo bash -c "echo \"xxx.xxx.xxx.xxx    husky\" >> /etc/hosts"```  
 Add to bashrc. Execute the following from inside the git repo folder  
 ```echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc```  
@@ -37,15 +38,17 @@ Build (cake has been aliased to catkin build with cmake options)
 Start the base  
 ```roslaunch husky_base base.launch```  
 
-This can be started with options. Append these to the end. ```base.launch arg:=value arg:=value```  
+This can be started with options. Append these to the end, eg.  
+```roslaunch husky_base base.launch arg:=value arg:=value```  
 Arguments  
 - **port**: Physical usb port of the husky. Defaults to environmental variable HUSKY_PORT or /dev/prolific
 - **pi_addr**: IP adcress of the connected raspberry pi. Defaults to environmental variable PI_ADDRESS or 10.0.0.5
-- **ouster**: Whether to launch ouster nodes. Defaults to false
-- **velodyne**: Whether to launch velodyne nodes. Defaults to false
-- **imu**: Whether to launch imu nodes on the raspberry pi. Defaults to false
-- **map**: Wheter to launch google cartographer nodes. Defaults to false
+- **ouster**: true/false. Whether to launch ouster nodes. Defaults to false
+- **velodyne**: true/false. Whether to launch velodyne nodes. Defaults to false
+- **imu**: true/false. Whether to launch imu nodes on the raspberry pi. Defaults to false
+- **map**: true/false. Whether to launch google cartographer nodes. Defaults to false
 
 #### On host machine
 
-To start joystick control `start_joy` has been aliased. Rviz can also be run. eg. `rviz -d demo_3d.rviz`
+To start joystick control `start_joy` has been aliased. Rviz can also be run. `rviz` will run a basic unconfigured rviz. The rviz folder contains configurations
+for rviz, which can be run with `rviz -d path_to_config`
