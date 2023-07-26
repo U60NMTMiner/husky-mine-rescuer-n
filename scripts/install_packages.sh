@@ -3,6 +3,8 @@
 set -eou pipefail
 export DEBIAN_FRONTEND='noninteractive'
 
+_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
 sudo add-apt-repository -y ppa:borglab/gtsam-release-4.0
 sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 sudo apt-get install curl
@@ -60,5 +62,4 @@ rosdep update
 rosdep install --from-paths ../ros/catkin_ws/src --ignore-src --rosdistro=noetic -y
 
 sudo apt-get remove ros-noetic-abseil-cpp || true
-/bin/bash ../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh || true
-rm -rf abseil-cpp
+/bin/bash $_dir/../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh || true
