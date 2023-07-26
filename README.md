@@ -18,11 +18,11 @@ Cd into the folder
 Run the install script  
 ```./scripts/install_packages.sh```  
 Add to bashrc. Execute the following from inside the git repo folder  
-```echo "/opt/ros/noetic/setup.bash" >> ~/.bashrc```  
-```echo "$PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```  
-On carl: ```echo "$PWD/scripts/env_husky.sh" >> ~/.bashrc```  
-On raspi: ```echo "$PWD/scripts/env_pi.sh" >> ~/.bashrc```  
-On host: ```echo "$PWD/scripts/env_ctrl.sh" >> ~/.bashrc```  
+```echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc```  
+```echo "source $PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```  
+On carl: ```echo "source $PWD/scripts/env_husky.sh" >> ~/.bashrc```  
+On raspi: ```echo "source $PWD/scripts/env_pi.sh" >> ~/.bashrc```  
+On host: ```echo "source $PWD/scripts/env_ctrl.sh" >> ~/.bashrc```  
 Source bashrc  
 ```source ~/.bashrc```  
 Build (cake has been aliased to catkin build with cmake options)  
