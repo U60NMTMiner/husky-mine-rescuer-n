@@ -16,7 +16,7 @@ Clone the git repo
 Cd into the folder  
 ```cd husky-mine-rescuer```  
 Run the install script  
-```sudo ./scripts/install_packages.sh```  
+```./scripts/install_packages.sh```  
 Add to bashrc. Execute the following from inside the git repo folder  
 ```echo "/opt/ros/noetic/setup.bash" >> ~/.bashrc```  
 ```echo "$PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```  
