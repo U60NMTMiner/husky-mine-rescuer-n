@@ -9,31 +9,42 @@ A Husky robot (Clearpath Robotics, Inc.) eqquiped with LiDARs and depth cameras 
 This installation is for Linux systems. It is possible to run on windows but not supported.
 Clone the Github Repo to your local machine and the husky
 
-### NIX
+### Installation
 
-For Ubuntu 20.04
-```
-sh <(curl -L https://nixos.org/nix/install) --daemon
-nix-env -iA cachix -f https://cachix.org/api/v1/install
-cachix use ros
-nix-shell
-```
+Clone the git repo
+`git clone https://github.com/vandroulakis/husky-mine-rescuer.git`
+Cd into the folder
+`cd husky-mine-rescuer`
+Run the install script
+`sudo ./scripts/install_packages.sh`
+Add to bashrc. Execute the following from inside the git repo folder
+`echo "/opt/ros/noetic/setup.bash" >> ~/.bashrc`
+`echo "$PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc`
+On carl: `echo "$PWD/scripts/env_husky.sh" >> ~/.bashrc`
+On raspi: `echo "$PWD/scripts/env_pi.sh" >> ~/.bashrc`
+On host: `echo "$PWD/scripts/env_ctrl.sh" >> ~/.bashrc`
+Source bashrc
+`source ~/.bashrc`
+Build (cake has been aliased to catkin build with cmake options)
+`cd ros/catkin_ws
+cake`
 
-### Docker
+### Usage
 
-The docker folder contains bash scripts that setup docker containers with ros for the robot and host computer
+#### On Carl
 
-#### ros_term
+Start the base
+`roslaunch husky_base base.launch`
 
-Run `ros_term` on the host computer to open a ROS connected terminal. This does not require ROS to be installed on the machine running it.
-Flags:
-**-r**: Remote. Connect to ROS on the robot. Running without this flag start roscore locally. To use this flag, add "<ip> carl" to your /etc/hosts file. Use after robot has been run on Carl
-**-d**: Disable rebuild. Uses cached docker container when internet access is limited
-**-j**: Joystick. Use this option to allow access to a USB joystick inside the docker container
+This can be started with options. Append these to the end. `base.launch arg:=value arg:=value`
+Arguments
+**port**: Physical usb port of the husky. Defaults to environmental variable HUSKY_PORT or /dev/prolific
+**pi_addr**: IP adcress of the connected raspberry pi. Defaults to environmental variable PI_ADDRESS or 10.0.0.5
+**ouster**: Whether to launch ouster nodes. Defaults to false
+**velodyne**: Whether to launch velodyne nodes. Defaults to false
+**imu**: Whether to launch imu nodes on the raspberry pi. Defaults to false
+**map**: Wheter to launch google cartographer nodes. Defaults to false
 
-#### robot
+#### On host machine
 
-Run `robot` on Carl to start ROS and all other operations
-Flags:
-**-d**: Disable rebuild. Uses cached docker container when internet access is limited
-
+To start joystick control `start_joy` has been aliased. Rviz can also be run. eg. `rviz -d demo_3d.rviz`
