@@ -1,0 +1,214 @@
+<!-- -*- xml -*- -->
+<NetworkDefinition
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://kayak.2codeornot2code.org/1.0"
+    xsi:noNamespaceSchemaLocation="Definition.xsd">
+    <Document name="DAVIID" version="2.0" author="NMT Lunabotics"
+              date="2023-03-22">
+        The NMT Lunabotics robot of 2022-'23.
+    </Document>
+
+    <!--Node for each can module-->
+    <Node id="0" name="Jetson"/>
+    <Node id="1" name="Locomotion Excavation"/>
+    <Node id="2" name="Pitch Controller"/>
+    <Node id="3" name="Depth Controller"/>
+    <Node id="4" name="Excavation Controller"/>
+
+    <Bus name="Main">
+        <Message id="0x000" name="EStop">
+            <!-- Which node gets this -->
+            <Producer>
+                <NodeRef id="0"/>
+            </Producer>
+            <Signal name="Stop" offset="0" length="8"/>
+        </Message>
+
+        <Message id="0x100" name="PitchCtrl">
+            <Producer>
+                <NodeRef id="2"/>
+            </Producer>
+            <Signal name="Left" offset="0" length="2">
+                <LabelSet>
+                    <Label name="Stop" value="0" />
+                    <Label name="Extend" value="1" />
+                    <Label name="Retract" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Right" offset="2" length="2">
+                <LabelSet>
+                    <Label name="Stop" value="0" />
+                    <Label name="Extend" value="1" />
+                    <Label name="Retract" value="2" />
+                </LabelSet>
+            </Signal>
+        </Message>
+
+        <Message id="0x110" name="PitchPositionTelem">
+            <Producer>
+                <NodeRef id="2"/>
+            </Producer>
+            <!-- Position telemetry relative to any arbitrary starting point. -->
+            <Signal name="LeftPosition" offset="0" length="9">
+                <Value type="unsigned" unit="mm" slope="0.703125"
+                       intercept="-180.0" min="-180.0" max="180" />
+            </Signal>
+            <Signal name="RightPosition" offset="9" length="9">
+                <Value type="unsigned" unit="mm" slope="0.703125"
+                       intercept="-180.0" min="-180.0" max="180" />
+            </Signal>
+            <!-- TODO: do we still need these? -->
+            <Signal name="LeftDirection" offset="19" length="2">
+                <LabelSet>
+                    <Label name='Stop' value="0"/>
+                    <Label name='Extend' value="1"/>
+                    <Label name='Retract' value="2"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="RightDirection" offset="21" length="2">
+                <LabelSet>
+                    <Label name='Stop' value="0"/>
+                    <Label name='Extend' value="1"/>
+                    <Label name='Retract' value="2"/>
+                </LabelSet>
+            </Signal>
+        </Message>
+
+        <Message id="0x111" name="PitchDriverTelem">
+            <!-- Priority 3 -->
+            <Producer>
+                <NodeRef id="2"/>
+            </Producer>
+            <Signal name="LeftCurrent" offset="0" length="8">
+                <!--slope = 20/186-->
+                <Value type="unsigned" unit="Amp" slope="0.10752"
+                       intercept="0.0" min="0.0" max="20.0"/>
+            </Signal>
+            <Signal name="RightCurrent" offset="8" length="8">
+                <!--slope = 20/186-->
+                <Value type="unsigned" unit="Amp" slope="0.10752"
+                       intercept="0.0" min="0.0" max="20.0"/>
+            </Signal>
+            <Signal name="LeftTemperature" offset="16" length="8">
+                <!--slope = (125+40)/255-->
+                <Value type="unsigned" unit="Cel" slope="0.64453125"
+                       intercept="-40" min="-40" max="125"/>
+            </Signal>
+            <Signal name="RightTemperature" offset="24" length="8">
+                <!--slope = (125+40)/255-->
+                <Value type="unsigned" unit="Cel" slope="0.64453125"
+                       intercept="-40" min="-40" max="125"/>
+            </Signal>
+            <Signal name="LeftDirection" offset="32" length="2">
+                <!--slope = (125+40)/255-->
+                <LabelSet>
+                    <Label name='Stop' value="0"/>
+                    <Label name='Extend' value="1"/>
+                    <Label name='Retract' value="2"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="RightDirection" offset="34" length="2">
+                <!--slope = (125+40)/255-->
+                <LabelSet>
+                    <Label name='Stop' value="0"/>
+                    <Label name='Extend' value="1"/>
+                    <Label name='Retract' value="2"/>
+                </LabelSet>
+            </Signal>
+        </Message>
+
+        <Message id="0x200" name="LocoCtrl">
+            <Producer>
+                <NodeRef id="1"/>
+            </Producer>
+            <Signal name="LeftVel" offset="0" length="16">
+                <Value type="unsigned" slope="0.0030517578125" intercept="-100" min="-100" max="100"/>
+            </Signal>
+            <Signal name="RightVel" offset="16" length="16">
+                <Value type="unsigned" slope="0.0030517578125" intercept="-100" min="-100" max="100"/>
+            </Signal>
+        </Message>
+
+        <Message id="0x201" name="ExcavCtrl">
+            <Producer>
+                <NodeRef id="4"/>
+            </Producer>
+            <Notes>
+                Negative power is reverse.
+                -100 is 100% power in reverse
+                100 is 100% power in reverse
+            </Notes>
+            <Signal name="Vel" offset="0" length="16">
+                <Value type="unsigned" slope="0.0030517578125" intercept="-100" min="-100" max="100"/>
+            </Signal>
+        </Message>
+
+        <Message id="0x300" name="StepperCtrl">
+            <Producer>
+                <NodeRef id="3"/>
+            </Producer>
+            <Notes>
+                Home may not actually be something we want at this
+                level. Steppers should home/reset some internal
+                measure of position whenever they hit a limit switch.
+                We should home on startup
+            </Notes>
+            <Signal name="Left" offset="0" length="2">
+                <LabelSet>
+                    <Label name="Stop" value="0" />
+                    <Label name="Extend" value="1" />
+                    <Label name="Retract" value="2" />
+                </LabelSet>
+            </Signal>
+            <Signal name="Right" offset="2" length="4">
+                <LabelSet>
+                    <Label name="Stop" value="0" />
+                    <Label name="Extend" value="1" />
+                    <Label name="Retract" value="2" />
+                </LabelSet>
+            </Signal>
+        </Message>
+
+        <Message id="0x311" name="StepperTelem">
+            <Notes>
+                Min and Max stop refer to if we are currently at a
+                limit switch. TODO: Get correct slope for steppers
+
+                Actual max is 500 mm
+            </Notes>
+            <Signal name="AtMinStop" offset="0" length="1">
+                <LabelSet>
+                    <Label name='False' value="0"/>
+                    <Label name='True' value="1"/>
+                </LabelSet>
+            </Signal>
+            <Signal name="LeftPosition" offset="2" length="11">
+                <Value type="unsigned" unit="mm" slope="0.25390625"
+                       intercept="0.0" min="0.0" max="520"/>
+            </Signal>
+            <Signal name="RightPosition" offset="13" length="11">
+                <Value type="unsigned" unit="mm" slope="0.25390625"
+                       intercept="0.0" min="0.0" max="520"/>
+            </Signal>
+        </Message>
+
+        <Message id="0x400" name="MastCtrl">
+            <Signal name="Direction" offset="0" length="2">
+                <LabelSet>
+                    <Label name='CCW' value="0"/>
+                    <Label name='Stop' value="1"/>
+                    <Label name='CW' value="2"/>
+                </LabelSet>
+            </Signal>
+        </Message>
+
+        <Message id="0x401" name="MastTelem">
+            <Notes>
+                Will print rotation angle. Min is -360, Max is 360 and Home is 0
+            </Notes>
+            <Signal name="Angle" offset="0" length="16">
+                <Value type="unsigned" slope="0.010986328125" intercept="-360" min="-360.5" max="360.5"/>
+            </Signal>
+        </Message>
+    </Bus>
+</NetworkDefinition>
