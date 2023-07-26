@@ -11,22 +11,22 @@ Clone the Github Repo to your local machine and the husky
 
 ### Installation
 
-Clone the git repo
-```git clone https://github.com/vandroulakis/husky-mine-rescuer.git```
-Cd into the folder
-```cd husky-mine-rescuer```
-Run the install script
-```sudo ./scripts/install_packages.sh```
-Add to bashrc. Execute the following from inside the git repo folder
-```echo "/opt/ros/noetic/setup.bash" >> ~/.bashrc```
-```echo "$PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```
-On carl: ```echo "$PWD/scripts/env_husky.sh" >> ~/.bashrc```
-On raspi: ```echo "$PWD/scripts/env_pi.sh" >> ~/.bashrc```
-On host: ```echo "$PWD/scripts/env_ctrl.sh" >> ~/.bashrc```
-Source bashrc
-```source ~/.bashrc```
-Build (cake has been aliased to catkin build with cmake options)
-```cd ros/catkin_ws && cake```
+- Clone the git repo
+- ```git clone https://github.com/vandroulakis/husky-mine-rescuer.git```
+- Cd into the folder
+- ```cd husky-mine-rescuer```
+- Run the install script
+- ```sudo ./scripts/install_packages.sh```
+- Add to bashrc. Execute the following from inside the git repo folder
+- ```echo "/opt/ros/noetic/setup.bash" >> ~/.bashrc```
+- ```echo "$PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```
+- On carl: ```echo "$PWD/scripts/env_husky.sh" >> ~/.bashrc```
+- On raspi: ```echo "$PWD/scripts/env_pi.sh" >> ~/.bashrc```
+- On host: ```echo "$PWD/scripts/env_ctrl.sh" >> ~/.bashrc```
+- Source bashrc
+- ```source ~/.bashrc```
+- Build (cake has been aliased to catkin build with cmake options)
+- ```cd ros/catkin_ws && cake```
 
 ### Usage
 
