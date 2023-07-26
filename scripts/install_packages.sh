@@ -60,7 +60,7 @@ sudo apt-get install -y ${packages[@]}
 
 sudo rosdep init || true
 rosdep update
-rosdep install --from-paths ../ros/catkin_ws/src --ignore-src --rosdistro=noetic -y
+rosdep install --from-paths $_dir/../ros/catkin_ws/src --ignore-src --rosdistro=noetic -y
 
 sudo apt-get remove ros-noetic-abseil-cpp || true
 /bin/bash $_dir/../ros/catkin_ws/src/cartographer/scripts/install_abseil.sh || true
