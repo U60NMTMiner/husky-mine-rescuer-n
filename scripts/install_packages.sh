@@ -41,6 +41,7 @@ packages=(
     python3-wstool
     python3-rosdep
     python3-catkin-tools
+    python-is-python3
 
     libcurl4-openssl-dev
     libspdlog-dev
