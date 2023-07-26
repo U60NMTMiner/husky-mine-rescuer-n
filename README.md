@@ -17,6 +17,8 @@ Cd into the folder
 ```cd husky-mine-rescuer```  
 Run the install script  
 ```./scripts/install_packages.sh```  
+Add the husky to your /etc/hosts, where {husky-ip} is the ip address of the husky. This is currently sent as a discord message on wifi startup.``
+```sudo echo "{husky-ip}    husky" >> /etc/hosts```
 Add to bashrc. Execute the following from inside the git repo folder  
 ```echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc```  
 ```echo "source $PWD/ros/catkin_ws/devel/setup.bash" >> ~/.bashrc```  
