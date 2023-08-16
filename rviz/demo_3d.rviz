@@ -5,6 +5,7 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /Status1
         - /Submaps1
         - /PointCloud23
         - /PointCloud23/Autocompute Value Bounds1
@@ -27,7 +28,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: ""
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -60,46 +61,6 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        base_footprint:
-          Value: true
-        base_link:
-          Value: true
-        front_bumper_link:
-          Value: true
-        front_left_wheel_link:
-          Value: true
-        front_right_wheel_link:
-          Value: true
-        imu_link:
-          Value: true
-        inertial_link:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
-        os_sensor:
-          Value: true
-        rear_bumper_link:
-          Value: true
-        rear_left_wheel_link:
-          Value: true
-        rear_right_wheel_link:
-          Value: true
-        sensor_arch_link:
-          Value: true
-        top_chassis_link:
-          Value: true
-        top_plate_front_link:
-          Value: true
-        top_plate_link:
-          Value: true
-        top_plate_rear_link:
-          Value: true
-        user_rail_link:
-          Value: true
-        velodyne:
-          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -107,41 +68,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_link:
-              base_footprint:
-                {}
-              front_bumper_link:
-                {}
-              front_left_wheel_link:
-                {}
-              front_right_wheel_link:
-                {}
-              inertial_link:
-                {}
-              rear_bumper_link:
-                {}
-              rear_left_wheel_link:
-                {}
-              rear_right_wheel_link:
-                {}
-              sensor_arch_link:
-                imu_link:
-                  {}
-                os_sensor:
-                  {}
-                velodyne:
-                  {}
-              top_chassis_link:
-                {}
-              top_plate_link:
-                top_plate_front_link:
-                  {}
-                top_plate_rear_link:
-                  {}
-              user_rail_link:
-                {}
+        {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -309,12 +236,6 @@ Visualization Manager:
       Submaps:
         All: true
         All Submap Pose Markers: true
-        Trajectory 0:
-          4.320: true
-          5.164: true
-          6.4: true
-          Submap Pose Markers: true
-          Value: true
       Topic: /submap_list
       Tracking frame: base_link
       Unreliable: false
@@ -352,7 +273,7 @@ Visualization Manager:
       Marker Topic: /trajectory_node_list
       Name: Trajectories
       Namespaces:
-        Trajectory 0: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray

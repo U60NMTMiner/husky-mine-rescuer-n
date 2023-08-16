@@ -95,11 +95,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
             type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
     </group>
 
-    <group if="$(arg map)">
-        <node pkg="move_base" type="move_base" name="move_base" output="screen">
-        </node>
-    </group>
-
     <!--
     THIS GROUP MUST BE LAST
     Everything after it will run on the pi
