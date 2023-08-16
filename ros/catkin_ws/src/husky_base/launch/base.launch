@@ -32,36 +32,39 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="velodyne" default="false" />
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
+    <arg name="base" default="true" />
 
-    <remap from="husky_velocity_controller/odom" to="odom" />
+    <group if="$(arg base)">
+        <remap from="husky_velocity_controller/odom" to="odom" />
 
-    <!-- Husky harware driver -->
-    <node pkg="husky_base" type="husky_node" name="husky_node">
-        <rosparam subst_value="true">
-            port: $(arg port)
+        <!-- Husky harware driver -->
+        <node pkg="husky_base" type="husky_node" name="husky_node">
+            <rosparam subst_value="true">
+                port: $(arg port)
 
-            control_frequency: 10.0
-            diagnostic_frequency: 1.0
+                control_frequency: 10.0
+                diagnostic_frequency: 1.0
 
-            max_acceleration: 1.0
-            max_speed: 1.0
-            wheel_diameter: 0.3302
-            polling_timeout: 10.0
-        </rosparam>
-    </node>
+                max_acceleration: 1.0
+                max_speed: 1.0
+                wheel_diameter: 0.3302
+                polling_timeout: 10.0
+            </rosparam>
+        </node>
 
-    <!-- Differential controller parameters and basic localization -->
-    <include file="$(find husky_control)/launch/control.launch">
-        <arg name="enable_ekf" value="false" />
-    </include>
+        <!-- Differential controller parameters and basic localization -->
+        <include file="$(find husky_control)/launch/control.launch">
+            <arg name="enable_ekf" value="false" />
+        </include>
 
-    <!--Teleop -->
-    <!--include file="$(find husky_control)/launch/teleop.launch" /-->
+        <!--Teleop -->
+        <!--include file="$(find husky_control)/launch/teleop.launch" /-->
 
-    <!-- Diagnostic Aggregator -->
-    <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
-        <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
-    </node>
+        <!-- Diagnostic Aggregator -->
+        <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator">
+            <rosparam command="load" file="$(find husky_base)/config/diagnostics.yaml"/>
+        </node>
+    </group>
 
     <group if="$(arg ouster)">
 	    <remap from="/ouster/points" to="/points2" />

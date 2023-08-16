@@ -16,5 +16,8 @@ else
     unset HUSKY_PORT
 fi
 
+alias start_base="roslaunch husky_base base.launch"
+alias start_base_map="roslaunch husky_base base.launch map:=true imu:=true velodyne:=true"
+
 exec "$@"
 
