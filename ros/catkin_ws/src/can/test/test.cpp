@@ -1,4 +1,4 @@
-#include "can.h"
+#include "can.hpp"
 #include <cstring>
 
 CAN::SocketCAN socket("can0");
