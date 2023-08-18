@@ -52,3 +52,8 @@ Arguments
 
 To start joystick control `start_joy` has been aliased. Rviz can also be run. `rviz` will run a basic unconfigured rviz. The rviz folder contains configurations
 for rviz, which can be run with `rviz -d path_to_config`
+
+### After First-Time Setup
+
+After you've run Carl for the first time, this Google Doc [Using the Husky Rover](https://docs.google.com/document/d/1mPvYiojK2ZEdXlYF6LimjaO2kbSO9qbYCGDZx3Ve6g0/edit?usp=sharing)
+contains step-by-step instructions for subsequent runs.
