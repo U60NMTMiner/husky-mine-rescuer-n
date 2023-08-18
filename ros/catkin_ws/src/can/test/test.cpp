@@ -1,6 +1,7 @@
 #include "can.h"
+#include <cstring>
 
-CAN::SocketCan socket("can0");
+CAN::SocketCAN socket("can0");
 
 int main(int argc, char** argv)
 {
