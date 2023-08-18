@@ -1,2 +1,0 @@
-default_port: serial:///dev/ttyACM0
-default_fqbn: arduino:avr:leonardo
