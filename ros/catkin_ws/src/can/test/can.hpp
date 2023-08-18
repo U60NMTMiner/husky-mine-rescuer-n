@@ -1,8 +1,7 @@
-#infdef CAN_H
+#ifndef CAN_H
 #define CAN_H
 
 #include <linux/can.h>
-#include <can/can_interface.hpp>
 #include <string>
 
 namespace CAN {
@@ -50,10 +49,10 @@ namespace CAN {
         void transmit(int can_id, uint8_t data[8]);
     };
 
-    void estop(SocketCan* can);
-    void drawer_open(SocketCan* can);
-    void drawer_close(SocketCan* can);
-    void drop_node(SocketCan* can);
+    void estop(SocketCAN& can);
+    void drawer_open(SocketCAN& can);
+    void drawer_close(SocketCAN& can);
+    void drop_node(SocketCAN& can);
 };
 
 #endif
