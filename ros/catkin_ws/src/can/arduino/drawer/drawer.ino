@@ -1,9 +1,23 @@
 #include <SPI.h>
 #include <mcp2515.h>
+#include <../frames.hpp>
+
+#define CAN_PIN 10
+#define STEP_PIN 4
+#define DIR_PIN 3
+#define INLIM_PIN 6
+#define OUTLIM_PIN 7
 
 struct can_frame canMsg;
+State s = NORMAL;
+MCP2515 mcp2515(CAN_PIN);
+int speed = 255; // CANNOT BE 0
+bool estop = false;
+bool extend = false;
+bool outlim = false;
+bool inlim = false;
 
-MCP2515 mcp2515(10);
+void step(bool dir);
 
 void setup()
 {
@@ -14,17 +28,44 @@ void setup()
     mcp2515.reset();
     mcp2515.setBitrate(CAN_500KBPS, MCP_8MHZ); //Sets CAN at speed 500KBPS and Clock 8MHz
     mcp2515.setNormalMode();
+
+    pinMode(STEP_PIN, OUTPUT);
+    pinMode(DIR_PIN, OUTPUT);
+    pinMode(INLIM_PIN, INPUT);
+    pinMode(OUTLIM_PIN, INPUT);
 }
 
 void loop()
 {
-    if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK) // To receive data (Poll Read)
+    // Receive CAN
+    if (mcp2515.readMessage(&canMsg) == MCP2515::ERROR_OK)
     {
-        for (int i = 0; i < canMsg.can_dlc; i++)
-        {
-            Serial.print(char(canMsg.data[i]));
-            Serial.print(" ");
-        }
-        Serial.println();
+        if (canMsg.can_id == int(frames::ESTOP))
+            estop = canMsg.data[0];
+        else if (canMsg.can_id == int(frames::DRAWER) && !estop)
+            extend = canMsg.data[0];
     }
+
+    // Don't do anything if estopped
+    if (estop) { return; }
+
+    // Check limit switches
+    outlim = digitalRead(OUTLIM_PIN);
+    inlim = digitalRead(INLIM_PIN);
+
+    while (!outlim && !inlim) {
+        step(extend);
+    }
+}
+
+void step(bool dir)
+{
+    if (speed < 1) { speed = 1; }
+    int delay = 255*5/speed;
+    
+    digitalWrite(DIR_PIN, dir);
+    digitalWrite(STEP_PIN, HIGH);
+    delayMicroseconds(delay);
+    digitalWrite(STEP_PIN, LOW);
+    delayMicroseconds(delay);
 }
