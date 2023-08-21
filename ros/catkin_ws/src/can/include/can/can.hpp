@@ -5,9 +5,11 @@
 #include <string>
 
 namespace CAN {
-    int E_STOP_FRAME_ID = 0x000;
-    int DRAWER_FRAME_ID = 0x001;
-    int NODE_FRAME_ID = 0x002;
+    enum class frames {
+        ESTOP=0x000,
+        DRAWER=0x001,
+        NODE=0x002,
+    };
 
     struct Stepper {
         int id;

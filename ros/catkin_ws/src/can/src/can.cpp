@@ -1,4 +1,4 @@
-#include <can/can.hpp>
+#include "can.hpp"
 #include <cstring>
 #include <iostream>
 #include <linux/can.h>
@@ -11,34 +11,34 @@
 using namespace std;
 
 namespace CAN {
-    void estop(SocketCan* can)
+    void estop(SocketCAN& can)
     {
         uint8_t msg[8];
         memset(msg, 0, sizeof(msg));
-        can.transmit(E_STOP_FRAME_ID, msg);
+        can.transmit(int(frames::ESTOP), msg);
     }
 
-    void drawer_open(SocketCan* can)
+    void drawer_open(SocketCAN& can)
     {
         uint8_t msg[8];
         memset(msg, 0, sizeof(msg));
         msg[0] = 1;
-        can.transmit(DRAWER_FRAME_ID, msg);
+        can.transmit(int(frames::DRAWER), msg);
     }
 
-    void drawer_open(SocketCan* can)
+    void drawer_close(SocketCAN& can)
     {
         uint8_t msg[8];
         memset(msg, 0, sizeof(msg));
         msg[0] = 0;
-        can.transmit(DRAWER_FRAME_ID, msg);
+        can.transmit(int(frames::DRAWER), msg);
     }
 
-    void drop_node(SocketCan* can)
+    void drop_node(SocketCAN& can)
     {
         uint8_t msg[8];
         memset(msg, 0, sizeof(msg));
-        can.transmit(NODE_FRAME_ID, msg);
+        can.transmit(int(frames::NODE), msg);
     }
     
     fd::fd() : id(-1) {}
@@ -66,7 +66,7 @@ namespace CAN {
 
     SocketCAN::SocketCAN() {}
     SocketCAN::SocketCAN(const string &interface) {
-        sock = socket(PF_CAN, SOCK_RAW, CAN_RAW);
+        sock = socket(AF_CAN, SOCK_RAW, CAN_RAW);
         if (*sock == -1)
             throw string("Error creating socket");
 
