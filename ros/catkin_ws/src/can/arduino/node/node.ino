@@ -15,16 +15,11 @@
 #define INLIM_PUSH_PIN 6
 #define OUTLIM_PUSH_PIN 7
 
-#define GATE_PIN 1
-
 struct can_frame canMsg;
 MCP2515 mcp2515(CAN_PIN);
 Servo gate(GATE_PIN);
 
 int speed = 255; // CANNOT BE 0
-// TODO fix these
-int GATE_OPEN_POS = 0;
-int GATE_CLOSE_POS = 0
 
 bool estop = false;
 bool inlim_vert = false;
@@ -35,14 +30,12 @@ bool outlim_push = false;
 /*
 0 - waiting
 1 - down
-2 - gate open
-3 - extend
-4 - retract
-5 - gate close
-6 - up
+2 - extend
+3 - retract
+4 - up
 */
 int state = 0;
-const int STATE_MAX = 6; // Number of states
+const int STATE_MAX = 4; // Number of states
 
 // Motor: false - vert, true - push
 // Dir: false - backward, true - forward
@@ -99,28 +92,19 @@ void loop()
         else
             state++;
         break;
-    case 2: // Gate open
-        gate.pos(GATE_OPEN_POS);
-        delay(50);
-        state++;
-        break;
-    case 3: // Push node out
+    case 2: // Push node out
         if (!outlim_push)
             step(true, true);
         else
             state++;
         break;
-    case 4: // Retract back in
+    case 3: // Retract back in
         if (!inlim_push)
             step(true, false);
         else
             state++;
         break;
-    case 5: // Close gate
-        gate.pos(GATE_CLOSE_POS);
-        state++;
-        break;
-    case 6: // Move up
+    case 4: // Move up
         if (!inlim_vert)
             step(false, false);
         else
