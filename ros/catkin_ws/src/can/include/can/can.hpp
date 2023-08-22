@@ -4,51 +4,36 @@
 #include <linux/can.h>
 #include <string>
 
-namespace CAN {
-    struct Stepper {
-        int id;
-        int speed;
-        bool dir;
-    };
+// Basic file descriptor wrapper. Not really intended for use outside
+// SocketCAN.
+class fd {
+    int id;
 
-    struct Servo {
-        int id;
-        int pos;
-    };
+  public:
+    fd();
+    fd(int n);
+    fd(fd &&other);
+    ~fd();
 
-    // Basic file descriptor wrapper. Not really intended for use outside
-    // SocketCAN.
-    class fd {
-        int id;
+    void operator=(fd &&other);
+    int operator*();
 
-      public:
-        fd();
-        fd(int n);
-        fd(fd &&other);
-        ~fd();
+    int into_raw();
+};
 
-        void operator=(fd &&other);
-        int operator*();
+// CAN socket.
+class SocketCAN {
+    fd sock;
+    void transmit(const struct can_frame &cf);
+    void transmit(int can_id, uint8_t data[8]);
 
-        int into_raw();
-    };
-
-    // CAN socket.
-    class SocketCAN {
-        fd sock;
-
-      public:
-        SocketCAN();
-        SocketCAN(const std::string &interface);
-
-        void transmit(const struct can_frame &cf);
-        void transmit(int can_id, uint8_t data[8]);
-    };
-
-    void estop(SocketCAN& can);
-    void drawer_open(SocketCAN& can);
-    void drawer_close(SocketCAN& can);
-    void drop_node(SocketCAN& can);
+  public:
+    SocketCAN();
+    SocketCAN(const std::string &interface);
+    
+    void estop(bool estop);
+    void drawer(bool drawer);
+    void drop_node();
 };
 
 #endif
