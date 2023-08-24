@@ -41,9 +41,9 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy)
     {
         drawer_state = !drawer_state;
         if (drawer_state) {
-           bash("cansend can0 001#01") 
+           bash("cansend can0 001#01"); 
         } else {
-           bash("cansend can0 001#00") 
+           bash("cansend can0 001#00");
         }
         ROS_INFO("Toggling Drawer");
     }
@@ -51,7 +51,7 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy)
 
     if (joy->buttons[node_btn] && !last_node)
     {
-        bash("cansend can0 002#00") 
+        bash("cansend can0 002#00");
         ROS_INFO("Dropping node");
     }
     last_node = joy->buttons[node_btn]; 
@@ -62,10 +62,10 @@ void estop_callback(const husky_msgs::HuskyStatus::ConstPtr& status)
     // Send estop true constantly in case someone missed it
     // But only once when false so CAN isn't clogged
     if(status->e_stop) {
-        bash("cansend can0 000#01") 
+        bash("cansend can0 000#01");
         ROS_INFO("Estopped");
     } else if(status->e_stop != last_estop) {
-        bash("cansend can0 000#00") 
+        bash("cansend can0 000#00");
         ROS_INFO("Not Estopped");
     }
     last_estop = status->e_stop;
