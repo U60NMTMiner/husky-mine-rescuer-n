@@ -1,23 +1,22 @@
 #include <SPI.h>
 #include <mcp2515.h>
-#include <../frames.hpp>
+#include "frames.hpp"
 
 // TODO fix pin numbers
-#define CAN_PIN 10
+#define CAN_PIN 53
 
-#define STEP_VERT_PIN 4
+#define STEP_VERT_PIN 10
 #define DIR_VERT_PIN 3
-#define INLIM_VERT_PIN 6
-#define OUTLIM_VERT_PIN 7
+#define INLIM_VERT_PIN 4
+#define OUTLIM_VERT_PIN 5
 
-#define STEP_PUSH_PIN 4
-#define DIR_PUSH_PIN 3
-#define INLIM_PUSH_PIN 6
-#define OUTLIM_PUSH_PIN 7
+#define STEP_PUSH_PIN 6
+#define DIR_PUSH_PIN 7
+#define INLIM_PUSH_PIN 8
+#define OUTLIM_PUSH_PIN 9
 
 struct can_frame canMsg;
 MCP2515 mcp2515(CAN_PIN);
-Servo gate(GATE_PIN);
 
 int speed = 255; // CANNOT BE 0
 
@@ -79,10 +78,10 @@ void loop()
     if (estop) { return; }
 
     // Check limit switches
-    outlim_vert = digitalRead(OUTLIM_VERT_PIN);
-    inlim_vert = digitalRead(INLIM_VERT_PIN);
-    outlim_push = digitalRead(OUTLIM_PUSH_PIN);
-    inlim_push = digitalRead(INLIM_PUSH_PIN);
+    outlim_vert = !digitalRead(OUTLIM_VERT_PIN);
+    inlim_vert = !digitalRead(INLIM_VERT_PIN);
+    outlim_push = !digitalRead(OUTLIM_PUSH_PIN);
+    inlim_push = !digitalRead(INLIM_PUSH_PIN);
 
     switch (state)
     {

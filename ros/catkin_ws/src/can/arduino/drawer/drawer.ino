@@ -1,6 +1,6 @@
 #include <SPI.h>
 #include <mcp2515.h>
-#include <../frames.hpp>
+#include "frames.hpp"
 
 #define CAN_PIN 10
 #define STEP_PIN 4
@@ -9,7 +9,6 @@
 #define OUTLIM_PIN 7
 
 struct can_frame canMsg;
-State s = NORMAL;
 MCP2515 mcp2515(CAN_PIN);
 int speed = 255; // CANNOT BE 0
 bool estop = false;
