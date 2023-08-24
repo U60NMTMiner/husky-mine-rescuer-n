@@ -33,7 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <arg name="imu" default="false" />
     <arg name="map" default="false" />
     <arg name="base" default="true" />
-    <arg name="move_base" default="true" />
+    <arg name="can" default="true" />
 
     <param name="use_sim_time" value="false" />
 
@@ -95,6 +95,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
             type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+    </group>
+
+    <group if="$(arg can)">
+        <include file="$(find can)/launch/can.launch" />
     </group>
 
     <!--
