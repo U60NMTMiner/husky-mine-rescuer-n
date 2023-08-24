@@ -14,7 +14,7 @@ bool last_node = false;
 bool last_estop = false;
 
 std::string interface;
-SocketCAN socket;
+static SocketCAN socket;
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy);
 void estop_callback(const husky_msgs::HuskyStatus::ConstPtr& msg);
@@ -26,8 +26,8 @@ int main(int argc, char** argv)
     socket = SocketCAN(interface);
 
     nh.param<std::string>("can_interface", interface, "can0");
-    nh.param<int>("drawer_btn", drawer_btn, 0);
-    nh.param<int>("node_btn", node_btn, 1);
+    nh.param<int>("drawer_btn", drawer_btn, 1);
+    nh.param<int>("node_btn", node_btn, 2);
 
     ros::Subscriber j_sub = nh.subscribe("joy_teleop/joy", 10, joy_callback);
     ros::Subscriber e_sub = nh.subscribe("status", 10, estop_callback);
@@ -41,12 +41,14 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy)
     {
         drawer_state = !drawer_state;
         socket.drawer(drawer_state);
+        ROS_INFO("Toggling Drawer");
     }
     last_drawer = joy->buttons[drawer_btn];
 
     if (joy->buttons[node_btn] && !last_node)
     {
         socket.drop_node();
+        ROS_INFO("Dropping node");
     }
     last_node = joy->buttons[node_btn]; 
 }
@@ -57,8 +59,10 @@ void estop_callback(const husky_msgs::HuskyStatus::ConstPtr& status)
     // But only once when false so CAN isn't clogged
     if(status->e_stop) {
         socket.estop(status->e_stop); 
+        ROS_INFO("Estopped");
     } else if(status->e_stop != last_estop) {
         socket.estop(status->e_stop);
+        ROS_INFO("Estopped");
     }
     last_estop = status->e_stop;
 }
