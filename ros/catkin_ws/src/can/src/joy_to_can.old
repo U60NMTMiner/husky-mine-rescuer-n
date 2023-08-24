@@ -18,12 +18,12 @@ static SocketCAN socket;
 
 void joy_callback(const sensor_msgs::Joy::ConstPtr& joy);
 void estop_callback(const husky_msgs::HuskyStatus::ConstPtr& msg);
-int bash(const std::string& command);
 
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "joy_to_can");
     ros::NodeHandle nh;
+    socket = SocketCAN(interface);
 
     nh.param<std::string>("can_interface", interface, "can0");
     nh.param<int>("drawer_btn", drawer_btn, 1);
@@ -40,18 +40,14 @@ void joy_callback(const sensor_msgs::Joy::ConstPtr& joy)
     if (joy->buttons[drawer_btn] && !last_drawer)
     {
         drawer_state = !drawer_state;
-        if (drawer_state) {
-           bash("cansend can0 001#01") 
-        } else {
-           bash("cansend can0 001#00") 
-        }
+        socket.drawer(drawer_state);
         ROS_INFO("Toggling Drawer");
     }
     last_drawer = joy->buttons[drawer_btn];
 
     if (joy->buttons[node_btn] && !last_node)
     {
-        bash("cansend can0 002#00") 
+        socket.drop_node();
         ROS_INFO("Dropping node");
     }
     last_node = joy->buttons[node_btn]; 
@@ -62,24 +58,11 @@ void estop_callback(const husky_msgs::HuskyStatus::ConstPtr& status)
     // Send estop true constantly in case someone missed it
     // But only once when false so CAN isn't clogged
     if(status->e_stop) {
-        bash("cansend can0 000#01") 
+        socket.estop(status->e_stop); 
         ROS_INFO("Estopped");
     } else if(status->e_stop != last_estop) {
-        bash("cansend can0 000#00") 
-        ROS_INFO("Not Estopped");
+        socket.estop(status->e_stop);
+        ROS_INFO("Estopped");
     }
     last_estop = status->e_stop;
-}
-
-int bash(const std::string& command) {
-    // Execute the given command using the system() function
-    int returnCode = system(command.c_str());
-
-    if (returnCode == 0) {
-        std::cout << "Command executed successfully." << std::endl;
-    } else {
-        std::cerr << "Command execution failed with return code: " << returnCode << std::endl;
-    }
-
-    return returnCode;
 }

@@ -36,6 +36,7 @@ packages=(
     ros-noetic-imu-transformer
     ros-noetic-imu-filter-madgwick
     ros-noetic-velodyne
+    ros-noetic-socketcan-interface
 
     python3-scipy
     python3-wstool
