@@ -36,7 +36,7 @@ The only package that needs to be compiled on the host machine is the husky_cont
 
 #### On host machine
 
-Connect to carl's network
+Connect to carl's wifi network
 SSID: carl
 Password: 123456789
 
@@ -57,7 +57,7 @@ The rviz folder contains configurations for rviz, which can be run with `rviz -d
 Systemd services will run husky_base on startup. These services are found under /etc/systemd/system.
 husky_base will move the robot based on commands sent to topic /cmd_vel or /joy_teleop/cmd_vel/
 These commands are sent over the network from the host computer running the teleop node. Carl
-hosts his own network 'carl' password 123456789. Host computer must be connected to this network
+hosts his own wifi network 'carl' password 123456789. Host computer must be connected to this network
 in order to communicate with the husky.
 
 Turn on the platform by pressing the power button. Ensure battery level is acceptable.
