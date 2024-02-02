@@ -20,6 +20,7 @@ Cd into the folder
 Run the install script
 ```cd scripts && ./install_packages_host.sh```  
 Add this line to /etc/hosts
+```sudo nano /etc/hosts```
 ```10.0.1.1  husky```
 
 The only package that needs to be compiled on the host machine is the husky_control package.
