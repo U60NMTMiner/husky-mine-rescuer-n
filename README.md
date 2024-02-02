@@ -36,7 +36,6 @@ SSID: carl
 Password: 123456789
 
 Source ros (more details on ros installation wiki). This can be added to your .bashrc to save time
-```source /opt/ros/devel/setup.bash```
 ```source path_to_catkin_ws/devel/setup.bash```
 
 Source provided script. Use . ./file instead of source. They are similar but do different things.
