@@ -16,6 +16,10 @@ is assumed.
 ROS noetic must be installed
 Clone the git repo  
 ```git clone https://github.com/vandroulakis/husky-mine-rescuer.git```  
+
+Alternatively:
+'''git clone git@github.com:vandroulakis/husky-mine-rescuer.git'''
+
 Cd into the folder  
 ```cd husky-mine-rescuer```  
 Install required packages
