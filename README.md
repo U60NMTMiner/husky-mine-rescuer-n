@@ -14,6 +14,7 @@ is assumed.
 ### Installation
 
 ROS noetic must be installed
+
 Clone the git repo  
 ```git clone https://github.com/vandroulakis/husky-mine-rescuer.git```  
 
