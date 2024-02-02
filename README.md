@@ -24,8 +24,8 @@ Alternatively:
 Cd into the folder  
 ```cd husky-mine-rescuer```  
 Install required packages
-```sudo apt update
-sudo apt install ros-noetic-joy ros-noetic-teleop-twist-joy ros-noetic-teleop-twist-keyboard ros-noetic-rviz ros-noetic-twist-mux ros-noetic-xacro ros-noetic-tf2-tools ros-noetic-urdf python3-rosdep python3-catkin-tools```
+```sudo apt update```
+```sudo apt install ros-noetic-joy ros-noetic-teleop-twist-joy ros-noetic-teleop-twist-keyboard ros-noetic-rviz ros-noetic-twist-mux ros-noetic-xacro ros-noetic-tf2-tools ros-noetic-urdf python3-rosdep python3-catkin-tools```
 Add ```10.0.1.1  husky``` to /etc/hosts
 ```sudo nano /etc/hosts```
 
