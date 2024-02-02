@@ -13,15 +13,16 @@ is assumed.
 
 ### Installation
 
+ROS noetic must be installed
 Clone the git repo  
 ```git clone https://github.com/vandroulakis/husky-mine-rescuer.git```  
 Cd into the folder  
 ```cd husky-mine-rescuer```  
-Run the install script
-```cd scripts && ./install_packages_host.sh```  
-Add this line to /etc/hosts
+Install required packages
+```sudo apt update
+sudo apt install ros-noetic-joy ros-noetic-teleop-twist-joy ros-noetic-teleop-twist-keyboard ros-noetic-rviz ros-noetic-twist-mux ros-noetic-xacro ros-noetic-tf2-tools ros-noetic-urdf python3-rosdep python3-catkin-tools```
+Add ```10.0.1.1  husky``` to /etc/hosts
 ```sudo nano /etc/hosts```
-```10.0.1.1  husky```
 
 The only package that needs to be compiled on the host machine is the husky_control package.
 ```cd ros/catkin_ws && catkin build husky_control```
