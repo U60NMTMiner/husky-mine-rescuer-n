@@ -1,4 +1,4 @@
-[# Husky Mine Rescuer
+# Husky Mine Rescuer
 
 ## Overview
 
@@ -27,6 +27,22 @@ The only package that needs to be compiled on the host machine is the husky_cont
 
 ### Usage
 
+#### On host machine
+
+Connect to carl's network
+SSID: carl
+Password: 123456789
+
+Source ros (more details on ros installation wiki). This can be added to your .bashrc to save time
+```source /opt/ros/devel/setup.bash```
+```source path_to_catkin_ws/devel/setup.bash```
+
+To move the robot, run the teleop.launch file in the husky_control package. Ensure the logitech controller is plugged into the host machine
+```roslaunch husky_control teleop.launch```
+
+The rviz folder contains configurations for rviz, which can be run with `rviz -d path_to_config` eg.
+```rviz -d rviz/demo_3d.rviz```
+
 #### On Carl
 
 Systemd services will run husky_base on startup. These services are found under /etc/systemd/system.
@@ -35,15 +51,23 @@ These commands are sent over the network from the host computer running the tele
 hosts his own network 'carl' password 123456789. Host computer must be connected to this network
 in order to communicate with the husky.
 
-Start the base  
-```roslaunch husky_base base.launch```
-This should run as a systemd service on startup. If the comm light does not turn green within 5 minutes, startup has failed
-For debugging, ssh into carl
+Turn on the platform by pressing the power button. Ensure battery level is acceptable.
+If the comm light does not turn green within 5 minutes, startup has failed.
+Restart the platform.
+
+The following instructions detail how to manually turn on the base node and mapping
+
+SSH into Carl
 ```ssh jetson@husky```
-kill the systemd service
-```sudo systemctl stop ros.service```
-And run the above command manually to see it's output. If it is successful, try restarting the systemd service
-```sudo systemctl start ros.service```
+Password is 123456789
+
+If the base node is already running, kill it. Try ```systemctl --help``` for more options
+```sudo systemctl stop rosMaster.service```
+Service will restart on reboot.
+
+Start the base
+```roslaunch husky_base base.launch```
+This normally will run as a systemd service on startup. 
 
 This can be started with options. Append these to the end, eg.  
 ```roslaunch husky_base base.launch arg:=value arg:=value```  
@@ -55,13 +79,3 @@ Arguments
 To run mapping:
 ```roslaunch husky_base base.launch map:=true ouster:=true```
 Mapping does not run automatically on startup.
-
-#### On host machine
-
-The rviz folder contains configurations
-for rviz, which can be run with `rviz -d path_to_config` eg.
-```rviz -d rviz/demo_3d.rviz```
-](url)
-
-To move the robot, run the teleop.launch file in the husky_control package. Ensure the logitech controller is plugged into the host machine
-```roslaunch husky_control teleop.launch```
