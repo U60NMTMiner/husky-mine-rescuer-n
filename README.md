@@ -29,7 +29,7 @@ Add ```10.0.1.1  husky``` to /etc/hosts
 ```sudo nano /etc/hosts```
 
 The only package that needs to be compiled on the host machine is the husky_control package.
-```cd ros/catkin_ws && catkin build husky_control```
+```cd ~/husky-mine-rescuer/ros/catkin_ws && catkin build husky_control```
 
 ### Usage
 
@@ -43,7 +43,7 @@ Source ros (more details on ros installation wiki). This can be added to your .b
 ```source path_to_catkin_ws/devel/setup.bash```
 
 Source provided script. Use . ./file instead of source. They are similar but do different things.
-```cd husky_mine_rescuer/scripts && . ./env_ctrl.sh```
+```cd husky-mine-rescuer/scripts && . ./env_ctrl.sh```
 
 To move the robot, run the teleop.launch file in the husky_control package. Ensure the logitech controller is plugged into the host machine
 ```roslaunch husky_control teleop.launch```
