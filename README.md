@@ -55,6 +55,7 @@ The rviz folder contains configurations for rviz, which can be run with `rviz -d
 #### On Carl
 
 Systemd services will run husky_base on startup. These services are found under /etc/systemd/system.
+The name of the service is ros.service
 husky_base will move the robot based on commands sent to topic /cmd_vel or /joy_teleop/cmd_vel/
 These commands are sent over the network from the host computer running the teleop node. Carl
 hosts his own wifi network 'carl' password 123456789. Host computer must be connected to this network
@@ -71,7 +72,7 @@ SSH into Carl
 Password is 123456789
 
 If the base node is already running, kill it. Try ```systemctl --help``` for more options
-```sudo systemctl stop rosMaster.service```
+```sudo systemctl stop ros.service```
 Service will restart on reboot.
 
 Start the base
