@@ -14,10 +14,6 @@ sudo apt-get upgrade -y
 
 packages=(
     ros-noetic-ros-base
-)
-: '
-packages=(
-    ros-noetic-ros-base
 
     ros-noetic-urdf
     ros-noetic-xacro
@@ -47,7 +43,7 @@ packages=(
 
     librealsense2-dev
 )
-'
+
 
 sudo apt-get install -y ${packages[@]}
 

@@ -2,12 +2,14 @@
 
 ## Overview
 
-A Husky robot (Clearpath Robotics, Inc.) eqquiped with LiDARs and depth cameras to be deployed in underground mine rescue operations. His name is Carl.
+A Husky robot (Clearpath Robotics, Inc.) eqquiped with LiDAR to be deployed in underground mine rescue operations. His name is Carl.
 
 ## Installation and Usage
 
 This installation is for Linux systems. It is possible to run on windows but not supported.
-Clone the Github Repo to your local machine and the husky
+Clone the Github Repo to your local machine. It should already be on the husky. Make sure to
+commit changes regularly and keep the husky up to date with git repo. Basic linux knowledge
+is assumed.
 
 ### Installation
 
@@ -26,6 +28,12 @@ The only package that needs to be compiled on the host machine is the husky_cont
 ### Usage
 
 #### On Carl
+
+Systemd services will run husky_base on startup. These services are found under /etc/systemd/system.
+husky_base will move the robot based on commands sent to topic /cmd_vel or /joy_teleop/cmd_vel/
+These commands are sent over the network from the host computer running the teleop node. Carl
+hosts his own network 'carl' password 123456789. Host computer must be connected to this network
+in order to communicate with the husky.
 
 Start the base  
 ```roslaunch husky_base base.launch```
