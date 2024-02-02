@@ -1,0 +1,26 @@
+<launch>
+    <!-- Node for move_base -->
+    <node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+
+        <!-- Set the global frame for move_base -->
+        <param name="global_frame_id" value="map" />
+
+        <!-- Set the robot's base frame -->
+        <param name="base_frame_id" value="base_link" />
+
+        <!-- Set the frequency for the planner -->
+        <param name="planner_frequency" value="1.0" />
+
+        <!-- Set the frequency for the controller -->
+        <param name="controller_frequency" value="5.0" />
+
+        <!-- Set the tolerance for reaching a goal -->
+        <param name="yaw_goal_tolerance" value="0.1" />
+        <param name="xy_goal_tolerance" value="0.1" />
+
+    </node>
+
+    <!-- Add other necessary nodes like amcl, map_server, etc. here -->
+
+</launch>
+

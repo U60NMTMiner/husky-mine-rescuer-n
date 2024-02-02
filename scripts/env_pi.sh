@@ -1,16 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 _dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 source ${_dir}/builder.sh
 
-port=$(get_usb "FTDI")
-if [[ $? -eq 0 ]]; then
-    export IMU_PORT=$port
-else
-    unset IMU_PORT
-fi
+export ROS_MASTER_URI="http://$ip_addr:11311"
 
 source /opt/ros/noetic/setup.bash
-source /home/pi/husky/ros/catkin_ws/devel/setup.bash
+source /home/ubuntu/goliath/catkin_ws/devel/setup.bash
 
 exec "$@"

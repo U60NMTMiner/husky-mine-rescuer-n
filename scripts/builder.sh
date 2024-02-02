@@ -1,15 +1,14 @@
-#!/bin/bash
-
 _dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-gcc -o ${_dir}/getip ${_dir}/getip.cpp
+getip() {
+    ip=$(grep -e "$1" /etc/hosts | awk '{print $1;}')
+    echo "$ip"
+    return 0
+}
 
 # Get active IP address
 ip_addr=$(ip route get 8.8.8.8 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-husky_addr=$(${_dir}/getip husky)
-
 export ROS_IP=$ip_addr
-export ROS_MASTER_URI="http://$husky_addr:11311"
 
 # USB serial Lookup function
 get_usb() {
