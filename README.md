@@ -1,4 +1,4 @@
-[# Husky Mine Rescuer
+# Husky Mine Rescuer
 
 ## Overview
 
