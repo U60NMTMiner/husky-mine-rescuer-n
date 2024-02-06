@@ -42,6 +42,7 @@ Password: 123456789
 
 Source ros (more details on ros installation wiki). This can be added to your .bashrc to save time
 ```source path_to_catkin_ws/devel/setup.bash```
+Or try```source ~/husky-mine-rescuer/ros/catkin_ws/devel/setup.bash```
 
 Source provided script. Use . ./file instead of source. They are similar but do different things.
 ```cd husky-mine-rescuer/scripts && . ./env_ctrl.sh```
