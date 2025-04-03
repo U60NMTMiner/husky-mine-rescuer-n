@@ -24,7 +24,7 @@ husky-mine-rescuer-n
 ```git clone git@github.com:U60NMTMiner/husky-mine-rescuer-n.git```
 
 Cd into the folder  
-```cd husky_mine_rescuer```  
+```cd husky-mine-rescuer-n```  
 Install required packages
 ```sudo apt update```
 ```sudo apt install ros-noetic-joy ros-noetic-teleop-twist-joy ros-noetic-teleop-twist-keyboard ros-noetic-rviz ros-noetic-twist-mux ros-noetic-xacro ros-noetic-tf2-tools ros-noetic-urdf python3-rosdep python3-catkin-tools```
@@ -32,7 +32,7 @@ Add ```10.0.1.1  husky``` to /etc/hosts
 ```sudo nano /etc/hosts```
 
 The only package that needs to be compiled on the host machine is the husky_control package.
-```cd ~/husky_mine_rescuer/ros/catkin_ws && catkin build husky_control```
+```cd ~/husky-mine-rescuer-n/ros/catkin_ws && catkin build husky_control```
 
 ### Usage
 
@@ -44,10 +44,10 @@ Password: 123456789
 
 Source ros (more details on ros installation wiki). This can be added to your .bashrc to save time
 ```source path_to_catkin_ws/devel/setup.bash```
-Or try```source ~/husky_mine_rescuer/ros/catkin_ws/devel/setup.bash```
+Or try```source ~/husky-mine-rescuer-n/ros/catkin_ws/devel/setup.bash```
 
 Source provided script. Use . ./file instead of source. They are similar but do different things.
-```cd husky_mine_rescuer/scripts && . ./env_ctrl.sh```
+```cd husky-mine-rescuer-n/scripts && . ./env_ctrl.sh```
 
 To move the robot, run the teleop.launch file in the husky_control package. Ensure the logitech controller is plugged into the host machine
 ```roslaunch husky_control teleop.launch```
@@ -71,7 +71,7 @@ Restart the platform.
 The following instructions detail how to manually turn on the base node and mapping
 
 SSH into Carl
-```ssh jetson@husky```
+```ssh jetson@husky```git clone https://github.com/U60NMTMiner/husky-mine-rescuer-n.git
 Password is 123456789
 
 If the base node is already running, kill it. Try ```systemctl --help``` for more options
